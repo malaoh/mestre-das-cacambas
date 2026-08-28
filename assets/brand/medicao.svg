@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Sistema abstrato de comparação de volumes</title>
+  <desc id="desc">Régua sem números, com cinco pontos graduais para sobreposição às imagens dos produtos.</desc>
+  <path d="M140 720H1460" stroke="#8D1027" stroke-width="5"/>
+  <path d="M140 692V748M470 692V748M800 680V760M1130 692V748M1460 692V748" stroke="#8D1027" stroke-width="5"/>
+  <circle cx="140" cy="720" r="15" fill="#F4EFE7" stroke="#8D1027" stroke-width="5"/>
+  <circle cx="470" cy="720" r="20" fill="#F4EFE7" stroke="#8D1027" stroke-width="5"/>
+  <circle cx="800" cy="720" r="25" fill="#8D1027" stroke="#F4EFE7" stroke-width="5"/>
+  <circle cx="1130" cy="720" r="30" fill="#F4EFE7" stroke="#8D1027" stroke-width="5"/>
+  <circle cx="1460" cy="720" r="35" fill="#F4EFE7" stroke="#8D1027" stroke-width="5"/>
+  <path d="M140 622V565H305M470 590V500H635M800 555V415H965M1130 500V315H1295M1460 440V205H1540" stroke="#F4EFE7" stroke-width="4" stroke-dasharray="12 12" opacity=".9"/>
+  <path d="M120 170H460L505 215H640" stroke="#8D1027" stroke-width="8"/>
+</svg>

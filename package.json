@@ -1,0 +1,20 @@
+{
+  "name": "mestre-das-cacambas",
+  "version": "1.0.0",
+  "description": "Experiência scroll story da Mestre das Caçambas",
+  "main": "app.js",
+  "scripts": {
+    "start": "node serve.mjs . --port 4173",
+    "check": "node --check app.js && node --check three-scene.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@fontsource/barlow-condensed": "5.3.0",
+    "@fontsource/manrope": "5.3.0",
+    "playwright-core": "1.62.1",
+    "three": "0.180.0"
+  }
+}

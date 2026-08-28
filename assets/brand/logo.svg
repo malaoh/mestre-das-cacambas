@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 260" role="img" aria-labelledby="title desc">
+  <title id="title">Mestre das Caçambas</title>
+  <desc id="desc">Wordmark industrial com corte angular inspirado no perfil lateral de uma caçamba.</desc>
+  <rect width="980" height="260" fill="none"/>
+  <path d="M36 42H450L492 80H610" fill="none" stroke="#8D1027" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/>
+  <text x="36" y="154" fill="#11100F" font-family="Arial Narrow, Roboto Condensed, sans-serif" font-size="112" font-weight="900" letter-spacing="4">MESTRE</text>
+  <text x="42" y="220" fill="#8D1027" font-family="Arial, sans-serif" font-size="42" font-weight="700" letter-spacing="15">DAS CAÇAMBAS</text>
+</svg>

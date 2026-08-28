@@ -1,0 +1,375 @@
+@font-face{font-family:"Barlow Condensed";src:url("assets/brand/barlow-condensed-900.woff2") format("woff2");font-weight:900;font-display:swap}
+@font-face{font-family:Manrope;src:url("assets/brand/manrope-400.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Manrope;src:url("assets/brand/manrope-600.woff2") format("woff2");font-weight:600;font-display:swap}
+
+:root{--sc-canvas:#11100f;--sc-surface:#191716;--sc-ink:#f4efe7;--sc-ink-soft:#d8d1c6;--sc-accent:#b5192f;--sc-accent-ink:#fff;--sc-font-display:"Barlow Condensed",Impact,sans-serif;--sc-font-text:Manrope,Arial,sans-serif;--rubro:#8d1027;--rubro-hot:#d12038;--concrete:#d8d1c6;--ivory:#f4efe7;--carbon:#11100f;--gutter:clamp(1rem,4.8vw,5.5rem)}
+html{background:var(--carbon);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{overscroll-behavior-y:none}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button{border:0}
+.skip-link{position:fixed;left:1rem;top:-5rem;z-index:1000;background:var(--ivory);color:var(--carbon);padding:.75rem 1rem}.skip-link:focus{top:1rem}
+
+/* ---- header / nav ------------------------------------------------------ */
+.site-header{position:fixed;inset:0 0 auto;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:clamp(.85rem,2.2vw,1.65rem) var(--gutter);background:color-mix(in oklab,var(--carbon) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(244,239,231,.08);pointer-events:none}
+.site-header>*{pointer-events:auto}.brand img{width:clamp(145px,16vw,220px);height:auto}.site-nav{display:flex;align-items:center;gap:clamp(1rem,2.7vw,2.8rem)}.site-nav a{font-size:.74rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;text-decoration:none;color:var(--ivory)}
+.header-cta,.primary-action{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:48px;padding:.8rem 1.5rem;background:linear-gradient(135deg,var(--rubro),var(--rubro-hot));color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);box-shadow:0 6px 16px rgba(50,0,9,.3);transition:filter .18s ease,transform .18s ease,box-shadow .18s ease}.header-cta:hover,.primary-action:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 8px 20px rgba(50,0,9,.36)}
+
+/* hamburger: hidden on desktop, the mobile drawer carries the full nav so
+   mobile isn't a stripped-down version of the desktop menu */
+.nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:42px;height:42px;background:transparent;cursor:pointer}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--ivory);margin-inline:auto;transition:transform .25s ease,opacity .2s ease}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.mobile-nav{display:none}
+
+/* a plain text CTA with an arrow, for mid-page prompts that don't want the
+   weight of the clipped primary-action button repeated on every section */
+.text-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:clamp(2rem,4vw,3rem);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ivory);text-decoration:none;border-bottom:1px solid var(--rubro-hot);padding-bottom:.3rem;transition:gap .18s ease,color .18s ease}
+.text-cta:hover{gap:.8rem;color:var(--rubro-hot)}
+.text-cta span{color:var(--rubro-hot)}
+/* quiet variant for the silence beat: same mechanism, none of the volume —
+   the section is a breath, the CTA shouldn't be the loudest thing in it */
+.text-cta--ghost{color:rgba(244,239,231,.72);border-bottom-color:rgba(209,32,56,.45);font-size:.7rem;text-shadow:0 2px 8px rgba(8,7,6,.9)}
+.text-cta--ghost:hover{color:var(--ivory)}
+
+/* header height offset so anchor jumps don't land under the fixed bar */
+#hero,#operacao,#processo,#silencio,#comparador,#aplicacao,#confianca,#faq,#pedido{scroll-margin-top:clamp(4.5rem,9vw,7rem)}
+
+/* ---- shared type ---------------------------------------------------- */
+h1,h2{font-family:var(--sc-font-display);font-weight:900;text-transform:uppercase;letter-spacing:-.026em;line-height:.87;text-wrap:balance;margin:0}
+/* capped by BOTH width and height: a wide-but-short display (large monitor,
+   short browser window) scales type off vw alone until it no longer fits
+   the viewport's vertical room and gets clipped above the fold. min() with
+   a vh term stops that without touching the normal mobile/desktop ramp. */
+h1{font-size:clamp(4.4rem,min(7.4vw,13vh),8.2rem)}
+h2{font-size:clamp(2.6rem,min(4.4vw,9vh),4.8rem)}
+p{margin:0}
+/* one or two words per headline carry the accent — weathered rubro, not a
+   gradient: a solid tone reads as material (rust, oxidised steel), a
+   gradient fill reads as decoration. */
+.ink{color:var(--rubro-hot)}
+.service-line{font-size:.72rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--concrete);padding-left:3.2rem;position:relative;margin:0}.service-line::before{content:"";position:absolute;left:0;top:.72em;width:2.35rem;height:2px;background:var(--rubro-hot)}
+.proof-line{margin-top:1.4rem;font-size:.73rem;letter-spacing:.05em;color:var(--concrete);display:flex;align-items:center;gap:.7rem}.proof-line span{width:2.6rem;height:1px;background:var(--rubro-hot);flex:none}
+.trust-tags{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:1.6rem 0 0;padding:0}
+.trust-tags li{padding:.5rem .85rem;border:1px solid rgba(244,239,231,.22);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--concrete)}
+
+/* ---- hero (data-sc-act="scrub") — richer scroll ----------------------- */
+.hero-act [data-sc-stage]{background:var(--carbon)}
+.sc-stage__poster,video[data-sc-scrub]{object-fit:cover}
+/* cinematic push-in tied to the act's own scroll progress (--sc-p, 0..1) */
+.hero-media{transform:scale(calc(1 + var(--sc-p,0) * 0.07));transform-origin:52% 45%;will-change:transform}
+/* pointer-driven light, desktop only: --sc-mx/--sc-my come from data-sc-spotlight */
+.hero-spotlight{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .3s ease;background:radial-gradient(420px circle at calc(var(--sc-mx,.5) * 100%) calc(var(--sc-my,.5) * 100%),rgba(244,239,231,.14),transparent 62%)}
+@media (hover:hover) and (pointer:fine){.hero-act:hover .hero-spotlight{opacity:1}}
+.hero-copy{max-width:min(680px,48vw);inset-inline:var(--gutter);left:var(--gutter);bottom:clamp(3rem,10vh,9rem)}
+@media (min-width:1600px){.hero-copy{max-width:min(820px,44vw)}}
+/* a wide-but-shortish window (large monitor, browser chrome eating the
+   height) needs the whole stack tightened, not just the headline — five
+   lines of body copy at desktop margins is what actually overflowed. */
+@media (min-width:1400px) and (max-height:980px){
+  .hero-copy{bottom:6vh}
+  .hero-copy p{margin-top:.85rem}
+  .hero-copy .primary-action{margin-top:1.15rem}
+  .hero-copy p.hero-coverage{margin-top:.75rem}
+}
+.hero-copy h1::first-line{color:var(--ivory)}
+.hero-copy p{max-width:44ch;margin:1.25rem 0 0;color:rgba(244,239,231,.84);font-size:clamp(.95rem,1.15vw,1.15rem);line-height:1.55}
+.hero-copy .primary-action{margin-top:1.8rem}
+/* coverage line: real, crawlable text, present from the first paint (not
+   scroll-gated) so it's both visible to a reader who never scrolls the hero
+   and indexable where Google actually looks. */
+.hero-copy p.hero-coverage{margin-top:1.1rem;font-size:.78rem;font-weight:600;letter-spacing:.01em;color:rgba(244,239,231,.7);max-width:38ch}
+
+/* ---- normal flow sections -------------------------------------------- */
+.flow-section{position:relative}
+.flow-section h2{color:var(--ivory)}
+.flow-section p{color:rgba(244,239,231,.84);font-size:clamp(.95rem,1.15vw,1.15rem);line-height:1.55;max-width:44ch}
+.flow-section--tight{padding-block:clamp(3rem,6vw,6rem)}
+
+.operation-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);align-items:center}
+.operation-grid--reverse .flow-photo,.operation-grid--reverse .flow-photo-duo{order:2}.operation-grid--reverse .flow-copy{order:1}
+.flow-photo{margin:0;border-radius:2px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 30px 60px -20px rgba(0,0,0,.55)}
+.flow-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.flow-copy h2{max-width:11ch}
+/* two real photos: a large frame plus a grounded inset for depth/trust */
+.flow-photo-duo{position:relative}
+.flow-photo-duo .flow-photo--main{aspect-ratio:4/3.1}
+.flow-photo-duo .flow-photo--inset{position:absolute;right:-6%;bottom:-11%;width:52%;aspect-ratio:4/3;border:4px solid var(--carbon);box-shadow:0 24px 40px -14px rgba(0,0,0,.6)}
+
+.process-list{list-style:none;padding:0;margin:2rem 0 0;border-top:1px solid rgba(244,239,231,.28);max-width:52rem}
+.process-list li{display:grid;grid-template-columns:7rem 1fr;gap:1rem;padding:1.1rem 0;border-bottom:1px solid rgba(244,239,231,.18)}
+.process-list strong{font-family:var(--sc-font-display);font-size:1.6rem;text-transform:uppercase;color:var(--ivory)}
+.process-list span{font-size:.88rem;color:rgba(244,239,231,.75);align-self:center}
+
+/* ---- silence beat: a second, shorter scrub act on the real rollon clip —
+   the footage the pipeline actually filmed for this moment, not a static
+   poster faked into moving. Same grammar as the hero (scrub + spotlight),
+   so the two quiet, camera-driven moments on the page read as one language.
+   The old ruler read as a stray progress bar; this reads as spec silhouettes
+   because it borrows the brief's own approved device: graduated outlines,
+   never numbers baked into the frame. */
+.silence-act [data-sc-stage]{background:var(--carbon)}
+.silence-media{object-fit:cover}
+.silence-spotlight{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .3s ease;background:radial-gradient(460px circle at calc(var(--sc-mx,.5) * 100%) calc(var(--sc-my,.5) * 100%),rgba(244,239,231,.12),transparent 62%)}
+@media (hover:hover) and (pointer:fine){.silence-act:hover .silence-spotlight{opacity:1}}
+.silence-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(13,12,11,.96) 0%,rgba(13,12,11,.76) 42%,rgba(13,12,11,.28) 70%,rgba(13,12,11,.18) 100%)}
+.silence-copy{position:absolute;inset:auto auto 17vh var(--gutter);z-index:2;max-width:min(640px,50vw)}
+.silence-kicker{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rubro-hot);margin:0;text-shadow:0 2px 8px rgba(8,7,6,.9)}
+.silence-heading{margin:.7rem 0 0;font-size:clamp(2.4rem,min(4.6vw,8vh),4.4rem);text-shadow:0 4px 18px rgba(8,7,6,.65)}
+.silence-sub{margin:1.1rem 0 0;font-size:.92rem;line-height:1.55;max-width:42ch;color:rgba(244,239,231,.88);text-shadow:0 2px 10px rgba(8,7,6,.85)}
+
+/* five graduated silhouettes, one per real volume, sharing a ground line —
+   the "silhuetas graduais" the brief called for, executed properly this
+   time. transform-scale off a common shape keeps every stroke identical
+   weight (vector-effect) instead of the biggest one reading heavier. */
+.measure-array{position:absolute;left:var(--gutter);right:var(--gutter);bottom:6vh;z-index:2;display:flex;align-items:flex-end;gap:clamp(1.1rem,3.2vw,2.75rem)}
+.measure-array::before{content:"";position:absolute;left:-.5rem;right:-.5rem;bottom:0;height:1px;background:rgba(244,239,231,.22)}
+.measure-array__item{width:46px;height:36px;transform-origin:bottom center;transform:scale(var(--ms,1))}
+.measure-array__item svg{width:100%;height:100%;overflow:visible;display:block}
+.measure-array__item path{fill:rgba(209,32,56,.14);stroke:var(--rubro-hot);stroke-width:1.4;vector-effect:non-scaling-stroke}
+
+/* ---- comparator (data-sc-act="pin") — the peak, now a living object --- */
+.comparator-act [data-sc-stage]{background:var(--carbon)}
+.comparator-bg{object-fit:cover;opacity:.55;filter:saturate(.55) contrast(1.12)}
+.comparator-copy{position:absolute;inset:auto var(--gutter) 6.5vh;display:grid;grid-template-columns:minmax(280px,1.2fr) minmax(560px,1.8fr);align-items:end;gap:clamp(2rem,5vw,6rem);max-width:none;z-index:2}
+.comparator-copy__head h2{font-size:clamp(2.65rem,4vw,4.65rem);max-width:12ch;color:var(--ivory)}
+.comparator-copy__head p{font-size:.83rem;margin-top:.8rem;max-width:fit-content;color:rgba(244,239,231,.94);text-shadow:0 2px 8px rgba(8,7,6,.85);background:rgba(8,7,6,.55);padding:.5rem .7rem}
+.product-selector{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(244,239,231,.28)}
+.product-selector button{position:relative;min-height:112px;text-align:left;background:rgba(17,16,15,.7);padding:1rem .75rem;color:var(--ivory);border-right:1px solid rgba(244,239,231,.15);cursor:pointer;transition:background .2s ease,transform .2s ease}
+.product-selector button:hover{background:rgba(141,16,39,.36)}
+.product-selector button[aria-checked="true"]{background:var(--rubro);transform:translateY(-8px)}
+.product-selector span,.product-selector strong{display:block;font-family:var(--sc-font-display);font-weight:900;line-height:1}
+.product-selector span{font-size:1.65rem}.product-selector strong{margin-top:.65rem;font-size:1.2rem}
+.product-selector small{display:block;margin-top:.35rem;text-transform:uppercase;letter-spacing:.09em;font-size:.56rem}
+.measurement-rail{grid-column:2;height:3px;background:rgba(244,239,231,.2);position:relative;margin-top:-3.2rem}
+.measurement-progress{display:block;height:100%;width:20%;background:var(--rubro-hot);box-shadow:0 0 18px rgba(209,32,56,.7);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.measurement-rail::after{content:"";position:absolute;inset:-5px 0;background:repeating-linear-gradient(90deg,transparent 0 calc(20% - 1px),rgba(244,239,231,.5) calc(20% - 1px) 20%)}
+.comparator-actions{grid-column:2;margin-top:1.1rem;display:flex;flex-direction:column;align-items:flex-start;gap:.55rem}
+.comparator-actions .primary-action{min-height:52px}
+.price-note{margin:0;font-size:.66rem;color:rgba(244,239,231,.6)}
+.three-stage{position:absolute;z-index:1;inset:4vh 7vw 26vh 39vw;pointer-events:auto;cursor:grab}
+.three-stage:active{cursor:grabbing}
+.three-stage canvas,.three-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.three-stage canvas{opacity:0;transition:opacity .4s ease}
+.three-stage.is-ready canvas{opacity:1}.three-stage.is-ready .three-fallback{opacity:0}
+.three-fallback{filter:drop-shadow(0 28px 34px rgba(0,0,0,.48));transition:opacity .4s ease}
+
+/* ---- aplicação ---------------------------------------------------------*/
+.service-tags{list-style:none;display:flex;flex-wrap:wrap;gap:0;margin:1.6rem 0 0;padding:0;border-block:1px solid rgba(244,239,231,.2)}
+.service-tags li{padding:.62rem .85rem;border-right:1px solid rgba(244,239,231,.2);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ivory)}
+
+/* ---- confiança: 3 pilares reais + depoimentos (estado honesto) --------- */
+.trust-head{max-width:44rem}
+.trust-head p{margin-top:1rem}
+.trust-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.5rem);margin-top:clamp(2.5rem,5vw,3.5rem)}
+.trust-pillar{border-top:1px solid rgba(244,239,231,.25);padding-top:1.1rem}
+.trust-pillar__mark{font-family:var(--sc-font-display);font-size:.85rem;font-weight:700;color:var(--rubro-hot)}
+.trust-pillar h3{margin:.6rem 0 0;font-family:var(--sc-font-display);font-weight:900;text-transform:uppercase;font-size:1.35rem;color:var(--ivory);letter-spacing:-.01em}
+.trust-pillar p{margin-top:.5rem;font-size:.85rem;max-width:none}
+.testimonial-block{margin-top:clamp(3rem,6vw,4.5rem);border-top:1px solid rgba(244,239,231,.18);padding-top:clamp(1.5rem,3vw,2.25rem)}
+.testimonial-block__label{font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(244,239,231,.55);margin:0 0 1.2rem}
+.testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.testimonial-card{margin:0;min-height:150px;border:1px solid rgba(244,239,231,.16);background:rgba(244,239,231,.03);padding:1.5rem 1.4rem 1.3rem;position:relative;display:flex;flex-direction:column}
+.testimonial-card__quote{display:block;font-family:var(--sc-font-display);font-size:2.6rem;color:var(--rubro-hot);line-height:1;margin-bottom:.2rem}
+.testimonial-card p{font-size:.85rem;line-height:1.6;color:rgba(244,239,231,.86);flex:1}
+.testimonial-card cite{display:block;margin-top:1.1rem;padding-top:.9rem;border-top:1px solid rgba(244,239,231,.14);font-style:normal;font-family:var(--sc-font-display);font-weight:700;text-transform:uppercase;font-size:.82rem;color:var(--ivory)}
+.testimonial-card cite span{display:block;margin-top:.15rem;font-family:var(--sc-font-text);font-weight:400;text-transform:none;font-size:.72rem;color:rgba(244,239,231,.55)}
+.testimonial-card--pending{border-style:dashed}
+.testimonial-card--pending p{font-style:italic;color:rgba(244,239,231,.5)}
+
+/* ---- FAQ: native details/summary, zero extra JS ------------------------ */
+.faq-list{margin-top:clamp(1.5rem,3vw,2.25rem);max-width:56rem;border-top:1px solid rgba(244,239,231,.25)}
+.faq-item{border-bottom:1px solid rgba(244,239,231,.18)}
+.faq-item summary{list-style:none;cursor:pointer;padding:1.15rem 2rem 1.15rem 0;position:relative;font-family:var(--sc-font-display);font-weight:700;font-size:1.05rem;color:var(--ivory);text-transform:uppercase;letter-spacing:-.005em}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";position:absolute;right:.2rem;top:1.1rem;font-family:var(--sc-font-text);font-size:1.3rem;font-weight:400;color:var(--rubro-hot);transition:transform .2s ease}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item p{padding:0 2rem 1.3rem 0;font-size:.85rem;max-width:60ch}
+
+/* ---- order form --------------------------------------------------------*/
+.order-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(1.5rem,3.5vw,4rem);align-items:start}
+.order-intro h2{font-size:clamp(2.4rem,3.6vw,3.6rem);max-width:12ch}
+.order-intro p{font-size:.85rem;margin-top:1rem}
+.order-summary{margin-top:clamp(1.5rem,3vw,2.25rem);padding:1.1rem 1.25rem;border:1px solid rgba(244,239,231,.2);background:rgba(244,239,231,.04)}
+.order-summary__label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--rubro-hot);font-weight:700;margin:0}
+.order-summary dl{margin:.85rem 0 0;display:grid;gap:.55rem}
+.order-summary dl>div{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(244,239,231,.12);padding-bottom:.5rem}
+.order-summary dt{font-size:.68rem;color:rgba(244,239,231,.6);text-transform:uppercase;letter-spacing:.06em}
+.order-summary dd{margin:0;font-size:.85rem;font-weight:600;color:var(--ivory);text-align:right}
+.order-summary__note{margin:.9rem 0 0;padding:.7rem .8rem;background:rgba(141,16,39,.22);border-left:2px solid var(--rubro-hot);font-size:.72rem;line-height:1.5;color:var(--concrete)}
+#order-form{padding-left:clamp(1rem,2.2vw,2.5rem);border-left:1px solid rgba(244,239,231,.2)}
+.form-legend{margin:0 0 1.5rem;font-size:.66rem;color:rgba(244,239,231,.5)}
+.form-legend span{color:var(--rubro-hot)}
+.form-group-label{margin:0 0 .8rem;font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;color:var(--rubro-hot);font-weight:700}
+.form-group-label:not(:first-of-type){margin-top:1.6rem}
+.field-row{display:grid;grid-template-columns:1.3fr .7fr;gap:.75rem}
+#order-form label{display:block;margin:0 0 .7rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(244,239,231,.68)}
+.field-required{color:var(--rubro-hot)}
+.field-optional span{text-transform:none;letter-spacing:0;color:rgba(244,239,231,.42);font-weight:400}
+#order-form input,#order-form select,#order-form textarea{width:100%;margin-top:.32rem;padding:.66rem .7rem;background:rgba(244,239,231,.06);border:1px solid rgba(244,239,231,.22);border-radius:0;color:var(--ivory);font-size:.8rem;text-transform:none;letter-spacing:0;transition:border-color .18s ease,background .18s ease}
+#order-form input:focus,#order-form select:focus,#order-form textarea:focus{border-color:var(--rubro-hot);background:rgba(244,239,231,.09);outline:none}
+#order-form select option{color:#111}
+#order-form textarea{resize:vertical}
+.form-actions{display:flex;gap:.75rem}.form-actions button{min-height:46px;font-size:.7rem}
+.secondary-action{background:transparent;border:1px solid rgba(244,239,231,.35);color:var(--ivory);padding:.75rem 1rem;text-transform:uppercase;letter-spacing:.07em;cursor:pointer}
+.secondary-action:hover{border-color:var(--rubro-hot);color:var(--rubro-hot)}
+.secondary-action small{display:block;font-size:.58rem;font-weight:400;opacity:.65;margin-top:.1rem}
+.form-status{font-size:.63rem;margin:.6rem 0 0;color:rgba(244,239,231,.75)}
+.primary-action:disabled,.secondary-action:disabled{filter:grayscale(.7);cursor:not-allowed;opacity:.5;transform:none;border-color:rgba(244,239,231,.15)}
+.secondary-action:disabled:hover{color:var(--ivory)}
+
+/* one-time confirmation pulse when the reader arrives here having already
+   picked a volume in the comparator — the summary was updating silently
+   before; now the arrival itself is legible. */
+.order-summary.is-confirmed{animation:summary-pulse 1.4s ease}
+@keyframes summary-pulse{0%{box-shadow:0 0 0 0 rgba(209,32,56,0);background:rgba(244,239,231,.04)}25%{box-shadow:0 0 0 3px rgba(209,32,56,.35);background:rgba(141,16,39,.16)}100%{box-shadow:0 0 0 0 rgba(209,32,56,0);background:rgba(244,239,231,.04)}}
+@media (prefers-reduced-motion:reduce){.order-summary.is-confirmed{animation:none}}
+/* ---- footer: full rebuild, own site-wide surface ------------------------*/
+.site-footer{background:var(--sc-surface);border-top:1px solid rgba(244,239,231,.14);padding-top:clamp(3rem,6vw,4.5rem)}
+.site-footer__grid{display:grid;grid-template-columns:1.3fr .8fr .8fr .9fr;gap:clamp(2rem,4vw,3.5rem)}
+.site-footer__brand img{width:150px}
+.site-footer__brand p{margin-top:1.1rem;font-size:.8rem;max-width:32ch;color:rgba(244,239,231,.62)}
+.site-footer__brand .text-cta{margin-top:1.4rem;font-size:.7rem}
+.site-footer__col{display:flex;flex-direction:column;gap:.65rem}
+.site-footer__col a{font-size:.8rem;color:rgba(244,239,231,.75);text-decoration:none}
+.site-footer__col a:hover{color:var(--ivory)}
+.site-footer__col p{font-size:.78rem;color:rgba(244,239,231,.6);line-height:1.5}
+.site-footer__heading{font-size:.64rem;text-transform:uppercase;letter-spacing:.12em;color:var(--rubro-hot);font-weight:700;margin:0 0 .3rem}
+.site-footer__pending{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;color:rgba(244,239,231,.55)}
+.site-footer__pending::before{content:"";width:7px;height:7px;border-radius:50%;background:rgba(244,239,231,.35);flex:none}
+.site-footer__bottom{margin-top:clamp(2.5rem,5vw,3.5rem);padding-block:1.5rem;border-top:1px solid rgba(244,239,231,.1)}
+.site-footer__bottom p{font-size:.68rem;color:rgba(244,239,231,.45)}
+
+.noscript{position:fixed;z-index:100;inset:auto 0 0;background:var(--ivory);color:var(--carbon);padding:1rem;text-align:center}
+
+/* ---- mobile -------------------------------------------------------------*/
+@media (max-width:900px){
+  .site-nav>a:not(.header-cta){display:none}.site-header{padding-top:max(.75rem,env(safe-area-inset-top))}.site-nav{gap:.6rem}.header-cta{font-size:.61rem;min-height:42px;padding:.7rem .85rem}.brand img{width:138px}
+  .nav-toggle{display:flex}
+  .mobile-nav{display:flex;flex-direction:column;gap:0;position:fixed;inset:0;z-index:75;background:var(--carbon);padding:calc(5.5rem + env(safe-area-inset-top)) 1.5rem 2rem;transform:translateX(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);overflow-y:auto}
+  .mobile-nav.is-open{transform:translateX(0)}
+  .mobile-nav a{font-family:var(--sc-font-display);font-weight:900;text-transform:uppercase;font-size:1.7rem;color:var(--ivory);text-decoration:none;padding:.85rem 0;border-bottom:1px solid rgba(244,239,231,.14)}
+  .mobile-nav a.primary-action{margin-top:1.75rem;text-align:center;border:0;font-size:.85rem}
+
+  h1{font-size:clamp(3.55rem,17vw,5.5rem)}
+  h2{font-size:clamp(2.4rem,11vw,3.6rem);max-width:12ch}
+  .hero-copy{max-width:calc(100vw - 2rem);left:1rem;right:1rem;bottom:7vh}
+  .hero-copy .primary-action{width:100%;margin-top:1.2rem}
+  .hero-copy p{font-size:.88rem;max-width:34ch}
+
+  /* portrait-leaning crops on mobile instead of a squashed landscape strip,
+     so the real photography reads as considered rather than a desktop
+     leftover. object-position keeps the truck/caçamba in frame. */
+  .operation-grid,.operation-grid--reverse{display:block}
+  .operation-grid--reverse .flow-photo,.operation-grid--reverse .flow-copy{order:initial}
+  .flow-photo{margin-bottom:1.5rem;aspect-ratio:3/4}
+  .flow-photo img{object-position:50% 42%}
+  .flow-photo-duo{margin-bottom:2.5rem}
+  .flow-photo-duo .flow-photo--main{aspect-ratio:3/4}
+  .flow-photo-duo .flow-photo--inset{width:62%;right:-4%;bottom:-9%;aspect-ratio:4/5}
+  .flow-copy h2{max-width:none}
+
+  .process-list{margin-top:1.2rem}
+  .process-list li{grid-template-columns:5.5rem 1fr;padding:.75rem 0}
+  .process-list strong{font-size:1.25rem}.process-list span{font-size:.76rem}
+
+  .silence-copy{inset:auto 1rem auto 1rem;bottom:20vh;max-width:none}
+  .silence-heading{font-size:clamp(2rem,10vw,3rem)}
+  .silence-sub{max-width:none;font-size:.85rem}
+  .measure-array{left:1rem;right:1rem;bottom:6vh;gap:.85rem}
+  .measure-array__item{width:34px;height:27px}
+
+  .comparator-copy{inset:auto 0 3.4vh;display:block;max-width:none;padding-inline:1rem}
+  .comparator-copy__head h2{font-size:clamp(2.3rem,10.5vw,3.4rem);max-width:none}
+  .comparator-copy__head p{display:none}
+  /* fade-out mask on the right edge: the row already peeks the next card,
+     but a fading edge reads unambiguously as "more to scroll" instead of
+     relying only on that partial peek. */
+  .product-selector{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:1rem -1rem 0;padding-left:1rem;padding-right:1.5rem;scrollbar-width:none;-webkit-mask-image:linear-gradient(to right,black 0%,black 86%,transparent 100%);mask-image:linear-gradient(to right,black 0%,black 86%,transparent 100%)}
+  .product-selector button{flex:0 0 28vw;min-width:104px;min-height:88px;scroll-snap-align:start;padding:.75rem .6rem}
+  .product-selector button[aria-checked="true"]{transform:translateY(-4px)}
+  .product-selector span{font-size:1.35rem}.product-selector strong{font-size:1rem;margin-top:.45rem}
+  .measurement-rail{margin:.55rem 0 0;grid-column:auto}
+  .comparator-actions{margin-top:.9rem}
+  .comparator-actions .primary-action{width:100%}
+  .price-note{font-size:.55rem}
+  .three-stage{inset:14vh 0 32vh}
+  .comparator-bg{object-position:center}
+
+  .service-tags{margin-top:1.2rem}.service-tags li{font-size:.56rem;padding:.5rem}
+
+  .trust-pillars{grid-template-columns:1fr;gap:1.75rem}
+  .testimonial-grid{grid-template-columns:1fr}
+  .testimonial-card{min-height:110px}
+  .faq-item summary{font-size:.92rem;padding:1rem 1.8rem 1rem 0}
+  .faq-item p{padding:0 1.8rem 1.1rem 0;font-size:.8rem}
+
+  .order-grid{display:block}
+  .order-summary{margin-top:1.25rem}
+  #order-form{padding:1.2rem 0 0;border:0}
+  .order-intro p{font-size:.82rem}
+  .field-row{gap:.55rem}
+  #order-form label{font-size:.55rem;margin-bottom:.5rem}
+  #order-form input,#order-form select,#order-form textarea{padding:.58rem;font-size:.72rem}
+  /* NÃO sticky: um bar fixo aqui flutuava sobre "Quando/Duração/Período/
+     Observações" antes de o leitor chegar neles, parecendo que o formulário
+     tinha acabado no meio. Ação fica só no fim real, onde ela é a conclusão. */
+  .form-actions{flex-direction:column;padding-top:.6rem}
+  .form-actions button{width:100%}
+
+  .site-footer__grid{grid-template-columns:1fr;gap:2rem}
+  .site-footer__brand p{max-width:none}
+
+  .text-cta{margin-top:1.75rem;font-size:.72rem}
+}
+
+@media (max-height:700px) and (min-width:901px){
+  .hero-copy{bottom:9vh}
+  h1{font-size:6rem}h2{font-size:4rem}
+  .comparator-copy{bottom:3vh}
+  .product-selector button{min-height:92px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .three-stage{display:none}
+  .hero-media{transform:none!important}
+  .hero-spotlight{display:none}
+  .silence-spotlight{display:none}
+  .site-header *,.primary-action,.product-selector button,.measurement-progress{transition:none!important}
+}
+
+/* ============================================================================
+   Páginas de cidade (cidades/*.html) — SEO local, zero JS, sem scrollcraft.
+   Reaproveita os tokens/classes acima (h1/h2, .ink, .flow-section, .faq-item,
+   .testimonial-card, .primary-action, .text-cta, .site-footer...); estas são
+   só as peças que a home não tinha: banda de hero estática, breadcrumb e a
+   grade de preços sem interação (o comparador de verdade vive só na home).
+   ========================================================================= */
+.city-header{position:relative;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:1.1rem var(--gutter);background:var(--carbon);border-bottom:1px solid rgba(244,239,231,.1)}
+.city-header .brand img{width:clamp(140px,14vw,190px)}
+.breadcrumb{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin:0;padding:1.5rem var(--gutter) 0;font-size:.68rem;letter-spacing:.04em;color:rgba(244,239,231,.5)}
+.breadcrumb a{color:rgba(244,239,231,.7);text-decoration:none}
+.breadcrumb a:hover{color:var(--ivory)}
+.breadcrumb li+li::before{content:"/";margin-right:.4rem;color:rgba(244,239,231,.3)}
+.city-hero{position:relative;padding-block:clamp(2.5rem,6vw,5rem)}
+.city-hero__media{position:absolute;inset:0;overflow:hidden}
+.city-hero__media img{width:100%;height:100%;object-fit:cover;filter:saturate(.65) contrast(1.08)}
+.city-hero__media::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(17,16,15,.94) 0%,rgba(17,16,15,.7) 46%,rgba(17,16,15,.32) 100%)}
+.city-hero__body{position:relative;z-index:1;max-width:38rem}
+.city-hero__eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--rubro-hot);margin:0 0 .9rem}
+.city-hero__body p{color:rgba(244,239,231,.86);margin-top:1.2rem;font-size:1rem;line-height:1.6}
+.city-hero__body .primary-action{margin-top:1.8rem}
+.price-grid{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:.75rem;margin:2rem 0 0;padding:0}
+.price-grid li{border:1px solid rgba(244,239,231,.2);padding:1.1rem .9rem;background:rgba(244,239,231,.03)}
+.price-grid li[data-featured]{border-color:var(--rubro-hot);background:rgba(141,16,39,.16)}
+.price-grid strong{display:block;font-family:var(--sc-font-display);font-weight:900;font-size:1.5rem;color:var(--ivory)}
+.price-grid span{display:block;margin-top:.5rem;font-size:1.15rem;font-weight:700;color:var(--rubro-hot)}
+.price-grid small{display:block;margin-top:.3rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:rgba(244,239,231,.5)}
+.city-testimonial{max-width:38rem}
+
+@media (max-width:900px){
+  .city-hero__body{max-width:none}
+  .price-grid{grid-template-columns:repeat(2,1fr)}
+}

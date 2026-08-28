@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TROCAR pelo domínio real de produção antes de publicar
+Sitemap: https://www.mestredascacambas.com.br/sitemap.xml
