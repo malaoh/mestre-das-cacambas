@@ -226,7 +226,7 @@ ${article.sections.map(s => `          <h2>${escapeHtml(s.h)}</h2>\n          <p
       </div>
     </div>
     <div class="sc-wrap site-footer__bottom">
-      <p>&copy; Mestre das Caçambas. Preços informados pelo cliente; sujeitos à confirmação de disponibilidade.</p>
+      <p>&copy; Mestre das Caçambas. Preços informados pelo cliente; sujeitos à confirmação de disponibilidade. <a href="../privacidade.html">Política de Privacidade</a></p>
     </div>
   </footer>
 </body>
@@ -267,7 +267,7 @@ function hubPage() {
   </main>
   <footer class="site-footer">
     <div class="sc-wrap site-footer__bottom">
-      <p>&copy; Mestre das Caçambas. Preços informados pelo cliente; sujeitos à confirmação de disponibilidade.</p>
+      <p>&copy; Mestre das Caçambas. Preços informados pelo cliente; sujeitos à confirmação de disponibilidade. <a href="../privacidade.html">Política de Privacidade</a></p>
     </div>
   </footer>
 </body>

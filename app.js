@@ -1,3 +1,8 @@
+// TROCAR: número real da central em formato internacional sem símbolos
+// (ex.: '5511987654321'). Assim que preenchido, o botão de WhatsApp liga
+// sozinho no próximo carregamento — nenhuma outra mudança de código precisa.
+const WHATSAPP_NUMBER = '';
+
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const prices = {3:200,4:260,5:310,7:380,10:460};
 const scales = {3:.76,4:.88,5:1,7:1.14,10:1.3};
@@ -138,6 +143,8 @@ function orderMessage(){
   const duration = data.get('duration') || '1-3';
   const lines = [
     'Olá, Mestre das Caçambas! Quero confirmar um pedido:',
+    `• Nome: ${data.get('name')}`,
+    `• Telefone: ${data.get('phone')}`,
     `• Cidade/UF: ${data.get('city')} / ${data.get('state')}`,
     `• Volume: ${size} m³ — R$ ${prices[size]},00`,
     `• Resíduo: ${data.get('waste')}`,
@@ -176,14 +183,38 @@ document.querySelector('#copy-order').addEventListener('click',async () => {
 form.addEventListener('submit',event => {
   event.preventDefault();
   if(!validate()) return;
+  if(WHATSAPP_NUMBER){
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(orderMessage())}`;
+    document.dispatchEvent(new CustomEvent('mestre:event',{detail:{name:'whatsapp_submit'}}));
+    window.open(url,'_blank','noopener');
+    status.textContent = 'Pedido enviado para o WhatsApp da central. Confirme por lá.';
+    return;
+  }
   status.textContent = 'O WhatsApp da central está em conexão — use "Copiar pedido" e envie pelo canal que preferir por enquanto.';
 });
+
+// assim que WHATSAPP_NUMBER for preenchido (ver topo do arquivo), o botão
+// liga sozinho: sai do estado desabilitado/secundário e vira a ação primária.
+function activateWhatsappIfReady(){
+  if(!WHATSAPP_NUMBER) return;
+  const btn = document.querySelector('#whatsapp-submit');
+  if(!btn) return;
+  btn.disabled = false;
+  btn.innerHTML = 'Enviar pelo WhatsApp';
+  btn.classList.remove('secondary-action');
+  btn.classList.add('primary-action');
+  document.querySelector('#copy-order')?.classList.remove('primary-action');
+  document.querySelector('#copy-order')?.classList.add('secondary-action');
+  status.textContent = '';
+  document.querySelectorAll('.site-footer__pending').forEach(el => el.textContent = 'WhatsApp da central ativo');
+}
 
 function mount(){
   if(!window.ScrollCraft) return;
   window.ScrollCraft.mount(document.body);
   selectProduct(5);
   updateSummary();
+  activateWhatsappIfReady();
   requestAnimationFrame(() => dispatchEvent(new Event('resize')));
   document.fonts?.ready.then(() => dispatchEvent(new Event('resize')));
 }
