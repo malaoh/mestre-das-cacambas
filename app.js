@@ -1,7 +1,7 @@
 // TROCAR: número real da central em formato internacional sem símbolos
 // (ex.: '5511987654321'). Assim que preenchido, o botão de WhatsApp liga
 // sozinho no próximo carregamento — nenhuma outra mudança de código precisa.
-const WHATSAPP_NUMBER = '';
+const WHATSAPP_NUMBER = '5546991167840';
 
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const prices = {3:200,4:260,5:310,7:380,10:460};
