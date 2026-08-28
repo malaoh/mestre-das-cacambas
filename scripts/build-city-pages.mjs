@@ -14,7 +14,7 @@ import { dirname, join } from 'node:path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const OUT_DIR = join(ROOT, 'cidades');
-const DOMAIN = 'https://www.mestredascacambas.com.br'; // TROCAR antes de publicar
+const DOMAIN = 'https://mestredascacambas.com.br'; // TROCAR antes de publicar
 
 mkdirSync(OUT_DIR, { recursive: true });
 

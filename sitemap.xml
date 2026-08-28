@@ -1,174 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TROCAR https://www.mestredascacambas.com.br pelo domínio real antes de publicar.
+<!-- TROCAR https://mestredascacambas.com.br pelo domínio real antes de publicar.
      Gerado por scripts/build-city-pages.mjs — não editar à mão. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.mestredascacambas.com.br/</loc>
+    <loc>https://mestredascacambas.com.br/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/index.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-rio-branco.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-rio-branco.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-maceio.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-maceio.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-macapa.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-macapa.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-manaus.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-manaus.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-salvador.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-salvador.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-fortaleza.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-fortaleza.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-brasilia.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-brasilia.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-vitoria.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-vitoria.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-goiania.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-goiania.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-sao-luis.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-sao-luis.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-cuiaba.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-cuiaba.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-campo-grande.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-campo-grande.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-belo-horizonte.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-belo-horizonte.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-belem.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-belem.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-joao-pessoa.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-joao-pessoa.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-curitiba.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-curitiba.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-recife.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-recife.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-teresina.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-teresina.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-rio-de-janeiro.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-rio-de-janeiro.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-natal.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-natal.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-porto-alegre.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-porto-alegre.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-porto-velho.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-porto-velho.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-boa-vista.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-boa-vista.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-florianopolis.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-florianopolis.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-sao-paulo.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-sao-paulo.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-aracaju.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-aracaju.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/cidades/aluguel-cacamba-palmas.html</loc>
+    <loc>https://mestredascacambas.com.br/cidades/aluguel-cacamba-palmas.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/blog/index.html</loc>
+    <loc>https://mestredascacambas.com.br/blog/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/blog/qual-cacamba-escolher-para-cada-reforma.html</loc>
+    <loc>https://mestredascacambas.com.br/blog/qual-cacamba-escolher-para-cada-reforma.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/blog/o-que-pode-e-nao-pode-ir-na-cacamba.html</loc>
+    <loc>https://mestredascacambas.com.br/blog/o-que-pode-e-nao-pode-ir-na-cacamba.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/blog/quanto-tempo-posso-ficar-com-a-cacamba.html</loc>
+    <loc>https://mestredascacambas.com.br/blog/quanto-tempo-posso-ficar-com-a-cacamba.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.mestredascacambas.com.br/blog/cacamba-para-reforma-pequena.html</loc>
+    <loc>https://mestredascacambas.com.br/blog/cacamba-para-reforma-pequena.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
