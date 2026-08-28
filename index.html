@@ -80,7 +80,7 @@
        2) No Google Ads, crie a ação de conversão e troque AW-XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXX.
        3) Descomente o bloco abaixo.
        O site já dispara eventos prontos pra conectar (document.addEventListener('mestre:event', e => ...)
-       em app.js): product_select, order_copy, whatsapp_submit, hero_whatsapp_click — os dois últimos são conversão de verdade.
+       em app.js): product_select, whatsapp_submit, hero_whatsapp_click — os dois últimos são conversão de verdade.
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -407,14 +407,10 @@
           </div>
           <label class="field-optional">Período desejado <span>(opcional)</span><input name="period" placeholder="Ex.: próxima semana"></label>
           <label class="field-optional">Observações <span>(opcional)</span><textarea name="notes" rows="2" placeholder="Acesso, endereço da obra ou detalhes importantes"></textarea></label>
-          <!-- Copiar pedido é a ação primária enquanto WHATSAPP_NUMBER (app.js)
-               estiver vazio. Preencher o número lá liga o WhatsApp e troca a
-               hierarquia dos botões sozinho, sem editar este HTML. -->
           <div class="form-actions">
-            <button class="primary-action" id="copy-order" type="button">Copiar pedido</button>
-            <button class="secondary-action" id="whatsapp-submit" type="submit" disabled>WhatsApp <small>(em conexão)</small></button>
+            <button class="primary-action" id="whatsapp-submit" type="submit">Enviar Pedido</button>
           </div>
-          <p class="form-status" id="form-status" role="status" aria-live="polite">O WhatsApp da central está em conexão — por enquanto, copie o pedido e envie pelo canal que preferir.</p>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>

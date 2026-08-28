@@ -324,7 +324,7 @@ p{margin:0}
   .faq-item p{padding:0 1.8rem 1.1rem 0;font-size:.8rem}
 
   .order-grid{display:block}
-  .order-summary{margin-top:1.25rem}
+  .order-summary{display:none}
   #order-form{padding:1.2rem 0 0;border:0}
   .order-intro p{font-size:.82rem}
   .field-row{gap:.55rem}

@@ -169,17 +169,6 @@ function validate(){
   return false;
 }
 
-document.querySelector('#copy-order').addEventListener('click',async () => {
-  if(!validate()) return;
-  try {
-    await navigator.clipboard.writeText(orderMessage());
-    status.textContent = 'Pedido copiado! Envie para a central assim que o WhatsApp estiver ativo, ou repasse pelo canal que preferir.';
-    document.dispatchEvent(new CustomEvent('mestre:event',{detail:{name:'order_copy'}}));
-  } catch {
-    status.textContent = 'Não foi possível copiar automaticamente. Selecione os dados e tente novamente.';
-  }
-});
-
 form.addEventListener('submit',event => {
   event.preventDefault();
   if(!validate()) return;
@@ -190,22 +179,14 @@ form.addEventListener('submit',event => {
     status.textContent = 'Pedido enviado para o WhatsApp da central. Confirme por lá.';
     return;
   }
-  status.textContent = 'O WhatsApp da central está em conexão — use "Copiar pedido" e envie pelo canal que preferir por enquanto.';
+  status.textContent = 'O WhatsApp da central ainda não está disponível. Tente novamente em instantes.';
 });
 
-// assim que WHATSAPP_NUMBER for preenchido (ver topo do arquivo), o botão
-// liga sozinho: sai do estado desabilitado/secundário e vira a ação primária.
+// assim que WHATSAPP_NUMBER for preenchido (ver topo do arquivo), o hero e o
+// rodapé confirmam sozinhos que o canal está ativo — o botão do formulário já
+// nasce pronto no HTML, não depende deste passo.
 function activateWhatsappIfReady(){
   if(!WHATSAPP_NUMBER) return;
-  const btn = document.querySelector('#whatsapp-submit');
-  if(!btn) return;
-  btn.disabled = false;
-  btn.innerHTML = 'Enviar pelo WhatsApp';
-  btn.classList.remove('secondary-action');
-  btn.classList.add('primary-action');
-  document.querySelector('#copy-order')?.classList.remove('primary-action');
-  document.querySelector('#copy-order')?.classList.add('secondary-action');
-  status.textContent = '';
   document.querySelectorAll('.site-footer__pending').forEach(el => el.textContent = 'WhatsApp da central ativo');
 
   const heroCta = document.querySelector('#hero-whatsapp-cta');
