@@ -39,6 +39,7 @@ const FAQ = [
   ['Que tipo de resíduo posso colocar na caçamba?', 'Informe o tipo no pedido (entulho de obra, concreto, madeira, poda). A equipe confirma o que é aceito de acordo com a legislação local.'],
   ['Por quanto tempo posso ficar com a caçamba?', 'O período é combinado no pedido. Locações acima de 7 dias têm condição especial de valor, informada pelo atendimento ao confirmar.'],
   ['Atende obra pequena ou só volume grande?', 'Os volumes vão de 3 a 10 m³, para reformas pequenas ou obras maiores. Necessidades acima disso entram como consulta específica.'],
+  ['Preciso de autorização da prefeitura para colocar a caçamba na rua?', 'Depende do município: caçamba apoiada em via pública costuma exigir permissão da prefeitura (TPU ou equivalente), enquanto dentro do terreno/obra normalmente não precisa. A central confirma a exigência específica da sua cidade antes da entrega.'],
 ];
 
 const CITIES = [
@@ -294,11 +295,21 @@ function hubPage() {
 `;
 }
 
+// mantenha sincronizado com os slugs de ARTICLES em scripts/build-blog.mjs
+const BLOG_SLUGS = [
+  'qual-cacamba-escolher-para-cada-reforma',
+  'o-que-pode-e-nao-pode-ir-na-cacamba',
+  'quanto-tempo-posso-ficar-com-a-cacamba',
+  'cacamba-para-reforma-pequena',
+];
+
 function sitemapXml() {
   const urls = [
     { loc: `${DOMAIN}/`, priority: '1.0' },
     { loc: `${DOMAIN}/cidades/index.html`, priority: '0.7' },
     ...CITIES.map(c => ({ loc: `${DOMAIN}/cidades/aluguel-cacamba-${c.slug}.html`, priority: '0.8' })),
+    { loc: `${DOMAIN}/blog/index.html`, priority: '0.6' },
+    ...BLOG_SLUGS.map(slug => ({ loc: `${DOMAIN}/blog/${slug}.html`, priority: '0.6' })),
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>
 <!-- TROCAR ${DOMAIN} pelo domínio real antes de publicar.

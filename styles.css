@@ -266,9 +266,13 @@ p{margin:0}
   .operation-grid--reverse .flow-photo,.operation-grid--reverse .flow-copy{order:initial}
   .flow-photo{margin-bottom:1.5rem;aspect-ratio:3/4}
   .flow-photo img{object-position:50% 42%}
-  .flow-photo-duo{margin-bottom:2.5rem}
-  .flow-photo-duo .flow-photo--main{aspect-ratio:3/4}
-  .flow-photo-duo .flow-photo--inset{width:62%;right:-4%;bottom:-9%;aspect-ratio:4/5}
+  /* the desktop duo is a large frame + a diagonally-overlapping inset —
+     a device built for a wide canvas. Forced into a 390px column it turns
+     into a cramped, illegible collage, so mobile gets its own device: two
+     full-width photos stacked with real air between them, no overlap. */
+  .flow-photo-duo{position:static;margin-bottom:2.5rem;display:flex;flex-direction:column;gap:.9rem}
+  .flow-photo-duo .flow-photo--main{aspect-ratio:4/3.2}
+  .flow-photo-duo .flow-photo--inset{position:static;width:84%;margin-left:auto;right:auto;bottom:auto;aspect-ratio:4/3;border-width:3px;box-shadow:0 18px 32px -16px rgba(0,0,0,.55)}
   .flow-copy h2{max-width:none}
 
   .process-list{margin-top:1.2rem}
@@ -372,4 +376,24 @@ p{margin:0}
 @media (max-width:900px){
   .city-hero__body{max-width:none}
   .price-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ============================================================================
+   Artigos de blog (blog/*.html) — mesmo shell das páginas de cidade
+   (.city-header, .breadcrumb, .city-hero), só adiciona a coluna de leitura.
+   ========================================================================= */
+.article-body{max-width:38rem;margin-top:1rem}
+.article-body p{color:rgba(244,239,231,.86);font-size:1rem;line-height:1.7;margin:0 0 1.3rem}
+.article-body h2{font-size:clamp(1.5rem,3.2vw,2rem);margin:2.4rem 0 1rem;max-width:none}
+.article-body ul{margin:0 0 1.3rem;padding-left:1.2rem;color:rgba(244,239,231,.86);line-height:1.7}
+.article-body li{margin-bottom:.5rem}
+.article-meta{font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(244,239,231,.5);margin:0 0 .5rem}
+.article-grid{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin:2rem 0 0;padding:0}
+.article-grid a{display:block;border:1px solid rgba(244,239,231,.16);padding:1.5rem;text-decoration:none;color:var(--ivory);transition:border-color .2s ease,background-color .2s ease}
+.article-grid a:hover{border-color:var(--rubro-hot);background:rgba(141,16,39,.1)}
+.article-grid strong{display:block;font-family:var(--sc-font-display);font-weight:900;font-size:1.15rem;margin-bottom:.5rem}
+.article-grid span{font-size:.85rem;color:rgba(244,239,231,.65);line-height:1.5}
+
+@media (max-width:900px){
+  .article-grid{grid-template-columns:1fr}
 }

@@ -147,4 +147,29 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://www.mestredascacambas.com.br/blog/index.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.mestredascacambas.com.br/blog/qual-cacamba-escolher-para-cada-reforma.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.mestredascacambas.com.br/blog/o-que-pode-e-nao-pode-ir-na-cacamba.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.mestredascacambas.com.br/blog/quanto-tempo-posso-ficar-com-a-cacamba.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.mestredascacambas.com.br/blog/cacamba-para-reforma-pequena.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>
