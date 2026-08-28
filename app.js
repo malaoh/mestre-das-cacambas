@@ -207,6 +207,15 @@ function activateWhatsappIfReady(){
   document.querySelector('#copy-order')?.classList.add('secondary-action');
   status.textContent = '';
   document.querySelectorAll('.site-footer__pending').forEach(el => el.textContent = 'WhatsApp da central ativo');
+
+  const heroCta = document.querySelector('#hero-whatsapp-cta');
+  if(heroCta){
+    const msg = encodeURIComponent('Olá! Quero falar sobre aluguel de caçamba.');
+    heroCta.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+    heroCta.target = '_blank';
+    heroCta.rel = 'noopener';
+    heroCta.addEventListener('click', () => document.dispatchEvent(new CustomEvent('mestre:event',{detail:{name:'hero_whatsapp_click'}})));
+  }
 }
 
 function mount(){

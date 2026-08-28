@@ -80,7 +80,7 @@
        2) No Google Ads, crie a ação de conversão e troque AW-XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXX.
        3) Descomente o bloco abaixo.
        O site já dispara eventos prontos pra conectar (document.addEventListener('mestre:event', e => ...)
-       em app.js): product_select, order_copy, whatsapp_submit — este último é a conversão de verdade.
+       em app.js): product_select, order_copy, whatsapp_submit, hero_whatsapp_click — os dois últimos são conversão de verdade.
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -89,7 +89,7 @@
     gtag('config', 'G-XXXXXXXXXX');
     document.addEventListener('mestre:event', e => {
       gtag('event', e.detail.name);
-      if (e.detail.name === 'whatsapp_submit') {
+      if (e.detail.name === 'whatsapp_submit' || e.detail.name === 'hero_whatsapp_click') {
         gtag('event', 'conversion', {'send_to': 'AW-XXXXXXXXX/XXXXXXXXXXXXXXXXXXXXXX'});
       }
     });
@@ -149,7 +149,15 @@
           <p class="service-line">Aluguel de caçambas para obras, reformas e entulho parado</p>
           <h1>Sua obra continua.<br>O <span class="ink">entulho</span> sai do caminho.</h1>
           <p>Sem ligação, sem espera, sem "te retorno amanhã": escolha o volume, informe sua cidade e monte o pedido em poucos minutos.</p>
-          <a class="primary-action" href="#pedido">Escolher minha caçamba</a>
+          <div class="hero-ctas">
+            <a class="primary-action" href="#pedido">Escolher minha caçamba</a>
+            <!-- liga sozinho pro WhatsApp quando WHATSAPP_NUMBER (app.js) for preenchido;
+                 até lá aponta pro formulário, pra nunca prometer um canal que não responde -->
+            <a class="whatsapp-cta" id="hero-whatsapp-cta" href="#pedido">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Zm5.8 14.2c-.3.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.7.8c.2.1.4.2.4.4.1.2.1.9-.2 1.5Z"/></svg>
+              Falar com a central
+            </a>
+          </div>
           <p class="hero-coverage">Atendimento em todo o Brasil, por parceiros e filiais regionais — encontramos a opção mais próxima da sua obra.</p>
         </div>
       </div>

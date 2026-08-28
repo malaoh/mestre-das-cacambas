@@ -34,6 +34,17 @@ button{border:0}
 .text-cta--ghost{color:rgba(244,239,231,.72);border-bottom-color:rgba(209,32,56,.45);font-size:.7rem;text-shadow:0 2px 8px rgba(8,7,6,.9)}
 .text-cta--ghost:hover{color:var(--ivory)}
 
+/* secondary CTA next to a primary-action: same shape/height, outline instead
+   of fill, so it reads as "the other path" without competing in weight or
+   color. The WhatsApp glyph carries its official green as a small recognition
+   accent — the button itself stays inside the Concreto Rubro palette. */
+.hero-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem}
+.whatsapp-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.8rem 1.4rem;background:transparent;border:1px solid rgba(244,239,231,.35);color:var(--ivory);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:border-color .18s ease,color .18s ease,background-color .18s ease}
+.whatsapp-cta:hover{border-color:#25D366;color:var(--ivory);background:rgba(37,211,102,.08)}
+.whatsapp-cta svg{width:16px;height:16px;flex:none;fill:#25D366}
+.whatsapp-cta:disabled{filter:grayscale(.6);opacity:.55;cursor:not-allowed}
+.whatsapp-cta:disabled:hover{border-color:rgba(244,239,231,.35);background:transparent}
+
 /* header height offset so anchor jumps don't land under the fixed bar */
 #hero,#operacao,#processo,#silencio,#comparador,#aplicacao,#confianca,#faq,#pedido{scroll-margin-top:clamp(4.5rem,9vw,7rem)}
 
@@ -256,7 +267,9 @@ p{margin:0}
   h1{font-size:clamp(3.55rem,17vw,5.5rem)}
   h2{font-size:clamp(2.4rem,11vw,3.6rem);max-width:12ch}
   .hero-copy{max-width:calc(100vw - 2rem);left:1rem;right:1rem;bottom:7vh}
-  .hero-copy .primary-action{width:100%;margin-top:1.2rem}
+  .hero-copy .hero-ctas{flex-direction:column;align-items:stretch;margin-top:1.2rem}
+  .hero-copy .primary-action{width:100%;margin-top:0}
+  .hero-copy .whatsapp-cta{width:100%}
   .hero-copy p{font-size:.88rem;max-width:34ch}
 
   /* portrait-leaning crops on mobile instead of a squashed landscape strip,
