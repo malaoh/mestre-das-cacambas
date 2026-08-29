@@ -140,11 +140,18 @@
         <div class="sc-scrim sc-scrim--lead"></div>
 
         <div class="sc-copy sc-copy--lead hero-copy" data-sc-cue="0 0.75 0">
-          <p class="service-line">Aluguel de caçambas para obras, reformas e entulho parado</p>
+          <p class="service-line">Disponibilidade e preço na sua cidade, agora</p>
           <h1>Sua obra continua.<br>O <span class="ink">entulho</span> sai do caminho.</h1>
-          <p>Sem ligação, sem espera, sem "te retorno amanhã": escolha o volume, informe sua cidade e monte o pedido em poucos minutos.</p>
+          <p>Informe sua cidade, veja o volume ideal e o preço na hora — sem esperar retorno.</p>
+          <!-- captura a cidade aqui mesmo e já joga pro form real (#order-form) lá
+               embaixo com o campo preenchido — fecha o intervalo entre "clicou no
+               anúncio" e "fez algo", sem duplicar estado (ver app.js). -->
+          <form class="hero-quick-form" id="hero-quick-form">
+            <label class="sr-only" for="hero-quick-city">Sua cidade</label>
+            <input type="text" id="hero-quick-city" name="quickCity" placeholder="Sua cidade" autocomplete="address-level2" required>
+            <button type="submit">Ver disponibilidade</button>
+          </form>
           <div class="hero-ctas">
-            <a class="primary-action" href="#pedido">Escolher minha caçamba</a>
             <!-- liga sozinho pro WhatsApp quando WHATSAPP_NUMBER (app.js) for preenchido;
                  até lá aponta pro formulário, pra nunca prometer um canal que não responde -->
             <a class="whatsapp-cta" id="hero-whatsapp-cta" href="#pedido">

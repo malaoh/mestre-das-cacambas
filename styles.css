@@ -9,6 +9,7 @@ body{overscroll-behavior-y:none}
 button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
 button{border:0}
 .skip-link{position:fixed;left:1rem;top:-5rem;z-index:1000;background:var(--ivory);color:var(--carbon);padding:.75rem 1rem}.skip-link:focus{top:1rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ---- header / nav ------------------------------------------------------ */
 .site-header{position:fixed;inset:0 0 auto;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:clamp(.85rem,2.2vw,1.65rem) var(--gutter);background:color-mix(in oklab,var(--carbon) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(244,239,231,.08);pointer-events:none}
@@ -34,11 +35,22 @@ button{border:0}
 .text-cta--ghost{color:rgba(244,239,231,.72);border-bottom-color:rgba(209,32,56,.45);font-size:.7rem;text-shadow:0 2px 8px rgba(8,7,6,.9)}
 .text-cta--ghost:hover{color:var(--ivory)}
 
+/* hero quick-locate: closes the gap between "informe sua cidade" (copy promise)
+   and actually doing it — an Ads click already knows what it wants, this turns
+   that intent into one field instead of a scroll down to the full form. Submits
+   into #order-form's real city input (see app.js), it doesn't duplicate state. */
+.hero-quick-form{display:flex;max-width:27rem;margin-top:1.8rem}
+.hero-quick-form input{flex:1;min-width:0;background:rgba(17,16,15,.6);border:1px solid rgba(244,239,231,.35);border-right:0;color:var(--ivory);font-size:.85rem;padding:0 1rem;backdrop-filter:blur(6px)}
+.hero-quick-form input::placeholder{color:rgba(244,239,231,.55)}
+.hero-quick-form input:focus{outline:none;border-color:var(--rubro-hot)}
+.hero-quick-form button{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:48px;padding:.8rem 1.3rem;background:linear-gradient(135deg,var(--rubro),var(--rubro-hot));color:#fff;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border:0;cursor:pointer;white-space:nowrap;transition:filter .18s ease,transform .18s ease}
+.hero-quick-form button:hover{filter:brightness(1.12);transform:translateY(-1px)}
+
 /* secondary CTA next to a primary-action: same shape/height, outline instead
    of fill, so it reads as "the other path" without competing in weight or
    color. The WhatsApp glyph carries its official green as a small recognition
    accent — the button itself stays inside the Concreto Rubro palette. */
-.hero-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem}
+.hero-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem;margin-top:1rem}
 .whatsapp-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.8rem 1.4rem;background:transparent;border:1px solid rgba(244,239,231,.35);color:var(--ivory);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:border-color .18s ease,color .18s ease,background-color .18s ease}
 .whatsapp-cta:hover{border-color:#25D366;color:var(--ivory);background:rgba(37,211,102,.08)}
 .whatsapp-cta svg{width:16px;height:16px;flex:none;fill:#25D366}
@@ -267,7 +279,10 @@ p{margin:0}
   h1{font-size:clamp(3.55rem,17vw,5.5rem)}
   h2{font-size:clamp(2.4rem,11vw,3.6rem);max-width:12ch}
   .hero-copy{max-width:calc(100vw - 2rem);left:1rem;right:1rem;bottom:7vh}
-  .hero-copy .hero-ctas{flex-direction:column;align-items:stretch;margin-top:1.2rem}
+  .hero-copy .hero-quick-form{flex-direction:column;max-width:none;margin-top:1.2rem}
+  .hero-copy .hero-quick-form input{border-right:1px solid rgba(244,239,231,.35);border-bottom:0;min-height:44px}
+  .hero-copy .hero-quick-form button{width:100%}
+  .hero-copy .hero-ctas{flex-direction:column;align-items:stretch;margin-top:.9rem}
   .hero-copy .primary-action{width:100%;margin-top:0}
   .hero-copy .whatsapp-cta{width:100%}
   .hero-copy p{font-size:.88rem;max-width:34ch}

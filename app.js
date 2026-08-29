@@ -72,6 +72,19 @@ form.addEventListener('input',updateSummary);
 form.addEventListener('change',updateSummary);
 document.addEventListener('product-change',updateSummary);
 
+// ---- localizador rápido do hero: preenche a cidade do form real e leva
+// até #pedido — não guarda estado próprio, só empurra pro form de verdade.
+document.querySelector('#hero-quick-form')?.addEventListener('submit',event => {
+  event.preventDefault();
+  const city = event.target.elements.quickCity.value.trim();
+  if(!city) return;
+  form.elements.city.value = city;
+  form.elements.city.dispatchEvent(new Event('input',{bubbles:true}));
+  document.dispatchEvent(new CustomEvent('mestre:event',{detail:{name:'hero_quick_city_submit'}}));
+  document.querySelector('#pedido').scrollIntoView({behavior:'smooth',block:'start'});
+  requestAnimationFrame(() => form.elements.state.focus());
+});
+
 // confirma visualmente, uma vez, que a escolha feita alhures "grudou" quando
 // o leitor chega ao resumo — sem isso só quem reparasse sozinho no texto
 // percebia a sincronização.
