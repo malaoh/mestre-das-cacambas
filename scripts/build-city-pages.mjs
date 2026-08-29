@@ -137,8 +137,8 @@ function cityPage(city, index) {
   <meta property="og:type" content="website">
   <link rel="canonical" href="${url}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2311100F'/><path d='M5 8h12l3 3h7' fill='none' stroke='%238D1027' stroke-width='3'/><path d='M6 15h20v9H6z' fill='%23F4EFE7'/></svg>">
-  <link rel="stylesheet" href="../scrollcraft.css">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../scrollcraft.css?v=2">
+  <link rel="stylesheet" href="../styles.css?v=2">
 ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringify(b)}\n  </script>`).join('\n')}
 </head>
 <body>
@@ -264,8 +264,8 @@ function hubPage() {
   <meta name="description" content="Veja as capitais atendidas pela Mestre das Caçambas em todo o Brasil, por parceiros e filiais regionais.">
   <meta name="theme-color" content="#11100F">
   <link rel="canonical" href="${DOMAIN}/cidades/index.html">
-  <link rel="stylesheet" href="../scrollcraft.css">
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../scrollcraft.css?v=2">
+  <link rel="stylesheet" href="../styles.css?v=2">
 </head>
 <body>
   <header class="city-header" aria-label="Navegação">
