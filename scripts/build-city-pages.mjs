@@ -6,7 +6,6 @@
 // HTML estático puro. Rodar de novo sempre que preço/FAQ/copy mudar:
 //   node scripts/build-city-pages.mjs
 //
-// TROCAR DOMAIN pelo domínio real de produção antes de publicar.
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
@@ -14,7 +13,7 @@ import { dirname, join } from 'node:path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const OUT_DIR = join(ROOT, 'cidades');
-const DOMAIN = 'https://mestredascacambas.com.br'; // TROCAR antes de publicar
+const DOMAIN = 'https://mestredascacambas.com.br'; // domínio real de produção
 
 mkdirSync(OUT_DIR, { recursive: true });
 
@@ -136,7 +135,6 @@ function cityPage(city, index) {
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:type" content="website">
-  <!-- TROCAR pelo domínio real de produção antes de publicar -->
   <link rel="canonical" href="${url}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2311100F'/><path d='M5 8h12l3 3h7' fill='none' stroke='%238D1027' stroke-width='3'/><path d='M6 15h20v9H6z' fill='%23F4EFE7'/></svg>">
   <link rel="stylesheet" href="../scrollcraft.css">
@@ -312,8 +310,7 @@ function sitemapXml() {
     ...BLOG_SLUGS.map(slug => ({ loc: `${DOMAIN}/blog/${slug}.html`, priority: '0.6' })),
   ];
   return `<?xml version="1.0" encoding="UTF-8"?>
-<!-- TROCAR ${DOMAIN} pelo domínio real antes de publicar.
-     Gerado por scripts/build-city-pages.mjs — não editar à mão. -->
+<!-- Gerado por scripts/build-city-pages.mjs — não editar à mão. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url>\n    <loc>${u.loc}</loc>\n    <changefreq>weekly</changefreq>\n    <priority>${u.priority}</priority>\n  </url>`).join('\n')}
 </urlset>

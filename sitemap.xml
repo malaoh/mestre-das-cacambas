@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- TROCAR https://mestredascacambas.com.br pelo domínio real antes de publicar.
-     Gerado por scripts/build-city-pages.mjs — não editar à mão. -->
+<!-- Gerado por scripts/build-city-pages.mjs — não editar à mão. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mestredascacambas.com.br/</loc>
