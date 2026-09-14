@@ -3,7 +3,7 @@
 // cobertura) + sitemap.xml a partir de UMA lista de dados + UM template.
 //
 // Ferramenta de build local, não roda em produção — a saída continua sendo
-// HTML estático puro. Rodar de novo sempre que preço/FAQ/copy mudar:
+// HTML estático puro. Rodar de novo sempre que tamanho/FAQ/copy mudar:
 //   node scripts/build-city-pages.mjs
 //
 import { writeFileSync, mkdirSync } from 'node:fs';
@@ -14,16 +14,25 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const OUT_DIR = join(ROOT, 'cidades');
 const DOMAIN = 'https://mestredascacambas.com.br'; // domínio real de produção
+const WHATSAPP_NUMBER = '5546991167840'; // mesmo número de app.js — trocar nos dois se mudar
 
 mkdirSync(OUT_DIR, { recursive: true });
 
+// ícone do WhatsApp, mesmo símbolo usado no index.html (id="ico-wa")
+const ICO_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Zm5.8 14.2c-.3.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.7.8c.2.1.4.2.4.4.1.2.1.9-.2 1.5Z"/></svg>';
+
+function waLink(message) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
 // ---- dados reais (não inventar nada além do nome/UF da capital) ----------
-const PRICES = [
-  { size: 3, price: 200, tag: 'Promocional' },
-  { size: 4, price: 260, tag: null },
-  { size: 5, price: 310, tag: 'Padrão', featured: true },
-  { size: 7, price: 380, tag: null },
-  { size: 10, price: 460, tag: null },
+// sem preço publicado: só tamanho. Orçamento é sempre pelo WhatsApp.
+const SIZES = [
+  { size: 3, tag: 'Promocional' },
+  { size: 4, tag: null },
+  { size: 5, tag: 'Padrão' },
+  { size: 7, tag: null },
+  { size: 10, tag: null },
 ];
 
 const TESTIMONIALS = {
@@ -33,10 +42,10 @@ const TESTIMONIALS = {
 };
 
 const FAQ = [
-  ['Como funciona a entrega e a retirada?', 'Você informa cidade, volume e tipo de resíduo no pedido. O atendimento confirma disponibilidade e combina o dia da entrega e da retirada com você.'],
-  ['Os preços da página já incluem tudo?', 'Os valores mostrados são os preços por volume. Taxas locais, tempo de permanência e regras específicas da sua cidade são confirmados pelo atendimento antes da contratação.'],
-  ['Que tipo de resíduo posso colocar na caçamba?', 'Informe o tipo no pedido (entulho de obra, concreto, madeira, poda). A equipe confirma o que é aceito de acordo com a legislação local.'],
-  ['Por quanto tempo posso ficar com a caçamba?', 'O período é combinado no pedido. Locações acima de 7 dias têm condição especial de valor, informada pelo atendimento ao confirmar.'],
+  ['Como funciona a entrega e a retirada?', 'Você informa cidade, volume e tipo de resíduo pelo WhatsApp. O atendimento confirma disponibilidade e combina o dia da entrega e da retirada com você.'],
+  ['Como sei quanto vou pagar?', 'O valor é informado pela central no WhatsApp, de acordo com o volume e a sua cidade. Taxas locais e tempo de permanência entram nessa conversa antes de qualquer contratação.'],
+  ['Que tipo de resíduo posso colocar na caçamba?', 'Informe o tipo no WhatsApp (entulho de obra, concreto, madeira, poda). A equipe confirma o que é aceito de acordo com a legislação local.'],
+  ['Por quanto tempo posso ficar com a caçamba?', 'O período é combinado com a central. Locações acima de 7 dias têm condição especial de valor, informada pelo atendimento ao confirmar.'],
   ['Atende obra pequena ou só volume grande?', 'Os volumes vão de 3 a 10 m³, para reformas pequenas ou obras maiores. Necessidades acima disso entram como consulta específica.'],
   ['Preciso de autorização da prefeitura para colocar a caçamba na rua?', 'Depende do município: caçamba apoiada em via pública costuma exigir permissão da prefeitura (TPU ou equivalente), enquanto dentro do terreno/obra normalmente não precisa. A central confirma a exigência específica da sua cidade antes da entrega.'],
 ];
@@ -64,12 +73,11 @@ function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
-function priceGridHtml() {
-  return PRICES.map(p => `
-            <li${p.featured ? ' data-featured' : ''}>
-              <strong>${p.size} m³</strong>
-              <span>R$ ${p.price}</span>
-              ${p.tag ? `<small>${p.tag}</small>` : ''}
+function sizeGridHtml() {
+  return SIZES.map(s => `
+            <li>
+              <strong>${s.size} m³</strong>
+              ${s.tag ? `<small>${s.tag}</small>` : ''}
             </li>`).join('');
 }
 
@@ -91,9 +99,11 @@ function faqSchema() {
 function cityPage(city, index) {
   const url = `${DOMAIN}/cidades/aluguel-cacamba-${city.slug}.html`;
   const title = `Aluguel de Caçamba em ${city.name} | Mestre das Caçambas`;
-  const description = `Aluguel de caçambas em ${city.name}, ${city.uf}. Preços reais de R$ 200 a R$ 460, pedido rápido e atendimento por parceiros e filiais regionais.`;
+  const description = `Aluguel de caçambas em ${city.name}, ${city.uf}. Volumes de 3 a 10 m³, orçamento rápido pelo WhatsApp, atendimento por parceiros e filiais regionais.`;
   const heroPhoto = HERO_PHOTOS[index % HERO_PHOTOS.length];
   const t = city.testimonial;
+  const waCityMsg = waLink(`Olá! Quero fazer um pedido de caçamba em ${city.name}. Pode me passar o orçamento e a disponibilidade?`);
+  const waCityGeneric = waLink(`Olá! Quero saber mais sobre aluguel de caçamba em ${city.name}.`);
 
   const schemaBlocks = [
     {
@@ -101,17 +111,16 @@ function cityPage(city, index) {
       name: `Aluguel de caçambas em ${city.name}`,
       provider: { '@type': 'Organization', name: 'Mestre das Caçambas' },
       areaServed: { '@type': 'City', name: city.name, containedInPlace: { '@type': 'State', name: city.uf } },
-      description: `Locação de caçambas para obras, reformas e retirada de entulho em ${city.name}, mediante confirmação de disponibilidade e regras locais.`,
+      description: `Locação de caçambas para obras, reformas e retirada de entulho em ${city.name}, mediante confirmação de disponibilidade e regras locais. Orçamento pelo WhatsApp.`,
       hasOfferCatalog: {
         '@type': 'OfferCatalog', name: 'Volumes de caçamba',
-        itemListElement: PRICES.map(p => ({ '@type': 'Offer', priceCurrency: 'BRL', price: `${p.price}.00`, itemOffered: { '@type': 'Service', name: `Caçamba ${p.size} m³` } })),
+        itemListElement: SIZES.map(s => ({ '@type': 'Service', name: `Caçamba ${s.size} m³` })),
       },
     },
     {
       '@context': 'https://schema.org', '@type': 'LocalBusiness',
       name: `Mestre das Caçambas — ${city.name}`,
       url, areaServed: { '@type': 'City', name: city.name },
-      priceRange: 'R$200–R$460',
     },
     { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqSchema() },
     {
@@ -137,8 +146,7 @@ function cityPage(city, index) {
   <meta property="og:type" content="website">
   <link rel="canonical" href="${url}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2311100F'/><path d='M5 8h12l3 3h7' fill='none' stroke='%238D1027' stroke-width='3'/><path d='M6 15h20v9H6z' fill='%23F4EFE7'/></svg>">
-  <link rel="stylesheet" href="../scrollcraft.css?v=2">
-  <link rel="stylesheet" href="../styles.css?v=2">
+  <link rel="stylesheet" href="../styles.css?v=4">
 ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringify(b)}\n  </script>`).join('\n')}
 </head>
 <body>
@@ -146,7 +154,7 @@ ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringi
     <a class="brand" href="../index.html" aria-label="Mestre das Caçambas, início">
       <img src="../assets/brand/logo-negativo.svg" width="170" height="45" alt="Mestre das Caçambas">
     </a>
-    <a class="header-cta" href="../index.html#comparador">Ver preços e comparador</a>
+    <a class="header-cta" href="${waCityMsg}" target="_blank" rel="noopener">${ICO_WA}Peça Aqui</a>
   </header>
 
   <nav aria-label="Trilha">
@@ -160,26 +168,29 @@ ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringi
   <main>
     <section class="city-hero">
       <div class="city-hero__media" aria-hidden="true">
-        <img src="../assets/media/${heroPhoto}" width="1672" height="941" alt="" loading="eager" decoding="async">
+        <picture>
+          <source media="(max-width: 760px)" srcset="../assets/media/${heroPhoto.replace('.webp', '-mobile.webp')}">
+          <img src="../assets/media/${heroPhoto}" width="1672" height="941" alt="" loading="eager" decoding="async">
+        </picture>
       </div>
       <div class="sc-wrap">
         <div class="city-hero__body">
           <p class="city-hero__eyebrow">Aluguel de caçambas em ${escapeHtml(city.name)}</p>
           <h1>Sua obra em ${escapeHtml(city.name)}<br>continua. O <span class="ink">entulho</span> sai do caminho.</h1>
-          <p>Atendimento em ${escapeHtml(city.name)} por parceiros e filiais regionais — mesmo processo, mesmo preço real, sem ligação e sem espera.</p>
-          <a class="primary-action" href="../index.html#comparador">Escolher minha caçamba</a>
+          <p>Atendimento em ${escapeHtml(city.name)} por parceiros e filiais regionais — mesmo processo, orçamento rápido pelo WhatsApp, sem ligação e sem espera.</p>
+          <a class="primary-action" href="${waCityMsg}" target="_blank" rel="noopener">${ICO_WA}Faça Seu Pedido</a>
         </div>
       </div>
     </section>
 
     <section class="sc-section flow-section flow-section--tight" aria-labelledby="price-title">
       <div class="sc-wrap">
-        <h2 id="price-title">Preço real, na hora, em ${escapeHtml(city.name)}.</h2>
-        <p>Os mesmos 5 volumes e valores usados em todo o Brasil — sem tabela escondida atrás de um formulário.</p>
-        <ul class="price-grid" aria-label="Volumes e preços">${priceGridHtml()}
+        <h2 id="price-title">Tamanhos disponíveis em ${escapeHtml(city.name)}.</h2>
+        <p>Os mesmos 5 volumes usados em todo o Brasil. Orçamento e disponibilidade direto com a central, pelo WhatsApp.</p>
+        <ul class="price-grid" aria-label="Volumes disponíveis">${sizeGridHtml()}
         </ul>
-        <p class="price-note" style="margin-top:1.5rem">Preços informados pelo cliente. Disponibilidade e condições são confirmadas no atendimento.</p>
-        <a class="text-cta" href="../index.html#pedido">Fazer meu pedido <span aria-hidden="true">→</span></a>
+        <p class="price-note" style="margin-top:1.5rem">Disponibilidade e condições são confirmadas pela central no WhatsApp.</p>
+        <a class="text-cta" href="${waCityMsg}" target="_blank" rel="noopener">${ICO_WA}Peça Aqui</a>
       </div>
     </section>
 
@@ -187,7 +198,7 @@ ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringi
       <div class="sc-wrap">
         <h2 id="process-title">Do pedido à retirada, cada etapa no <span class="ink">lugar</span>.</h2>
         <ol class="process-list">
-          <li><strong>Pedir</strong><span>Cidade, volume e tipo de resíduo — sem burocracia.</span></li>
+          <li><strong>Pedir</strong><span>Cidade, volume e tipo de resíduo — direto no WhatsApp, sem burocracia.</span></li>
           <li><strong>Confirmar</strong><span>O atendimento valida prazo, regras e disponibilidade em ${escapeHtml(city.name)}.</span></li>
           <li><strong>Coordenar</strong><span>Entrega e retirada seguem exatamente o combinado.</span></li>
         </ol>
@@ -210,7 +221,7 @@ ${t ? `
         <h2 id="faq-title">Perguntas <span class="ink">frequentes</span></h2>
         <div class="faq-list">${faqHtml()}
         </div>
-        <a class="text-cta" href="../index.html#pedido">Falar com a central <span aria-hidden="true">→</span></a>
+        <a class="text-cta" href="${waCityGeneric}" target="_blank" rel="noopener">${ICO_WA}Falar no WhatsApp</a>
       </div>
     </section>
   </main>
@@ -219,12 +230,12 @@ ${t ? `
     <div class="sc-wrap site-footer__grid">
       <div class="site-footer__brand">
         <img src="../assets/brand/logo-negativo.svg" width="170" height="46" alt="Mestre das Caçambas">
-        <p>Entulho parado não espera. Escolha o volume, confirme com a central e resolva — sem ligação, sem enrolação.</p>
-        <a class="text-cta" href="../index.html#pedido">Fazer meu pedido <span aria-hidden="true">→</span></a>
+        <p>Entulho parado não espera. Escolha o volume, fale com a central pelo WhatsApp e resolva — sem ligação, sem enrolação.</p>
+        <a class="text-cta" href="${waCityMsg}" target="_blank" rel="noopener">${ICO_WA}Faça Seu Pedido</a>
       </div>
       <nav class="site-footer__col" aria-label="Navegação do rodapé">
         <p class="site-footer__heading">Navegação</p>
-        <a href="../index.html#comparador">Caçambas e preços</a>
+        <a href="../index.html#comparador">Caçambas</a>
         <a href="../index.html#confianca">Por que confiar</a>
         <a href="../index.html#faq">Perguntas frequentes</a>
         <a href="../cidades/index.html">Outras cidades atendidas</a>
@@ -235,12 +246,12 @@ ${t ? `
       </div>
       <div class="site-footer__col">
         <p class="site-footer__heading">Contato</p>
-        <p class="site-footer__pending">WhatsApp da central em conexão</p>
+        <p class="site-footer__pending">WhatsApp da central ativo</p>
         <p>Disponibilidade, resíduos aceitos, permanência e taxas são sempre confirmados no atendimento.</p>
       </div>
     </div>
     <div class="sc-wrap site-footer__bottom">
-      <p>&copy; Mestre das Caçambas. Preços informados pelo cliente; sujeitos à confirmação de disponibilidade. <a href="../privacidade.html">Política de Privacidade</a></p>
+      <p>&copy; Mestre das Caçambas. Disponibilidade e condições confirmadas pela central antes da contratação. <a href="../privacidade.html">Política de Privacidade</a></p>
     </div>
   </footer>
 </body>
@@ -254,6 +265,7 @@ function hubPage() {
   const list = Object.keys(byUf).sort().map(uf =>
     byUf[uf].map(c => `<li><a href="aluguel-cacamba-${c.slug}.html">${escapeHtml(c.name)}, ${uf}</a></li>`).join('')
   ).join('');
+  const waGeneric = waLink('Olá! Quero saber mais sobre aluguel de caçamba.');
 
   return `<!doctype html>
 <html lang="pt-BR">
@@ -264,28 +276,27 @@ function hubPage() {
   <meta name="description" content="Veja as capitais atendidas pela Mestre das Caçambas em todo o Brasil, por parceiros e filiais regionais.">
   <meta name="theme-color" content="#11100F">
   <link rel="canonical" href="${DOMAIN}/cidades/index.html">
-  <link rel="stylesheet" href="../scrollcraft.css?v=2">
-  <link rel="stylesheet" href="../styles.css?v=2">
+  <link rel="stylesheet" href="../styles.css?v=4">
 </head>
 <body>
   <header class="city-header" aria-label="Navegação">
     <a class="brand" href="../index.html" aria-label="Mestre das Caçambas, início">
       <img src="../assets/brand/logo-negativo.svg" width="170" height="45" alt="Mestre das Caçambas">
     </a>
-    <a class="header-cta" href="../index.html#comparador">Ver preços e comparador</a>
+    <a class="header-cta" href="${waGeneric}" target="_blank" rel="noopener">${ICO_WA}Peça Aqui</a>
   </header>
   <main>
     <section class="sc-section flow-section" aria-labelledby="hub-title">
       <div class="sc-wrap">
         <h2 id="hub-title">Cidades <span class="ink">atendidas</span></h2>
-        <p>Atendimento em todo o Brasil, por parceiros e filiais regionais. Comece pela sua capital — o preço e o pedido são os mesmos em qualquer uma delas.</p>
+        <p>Atendimento em todo o Brasil, por parceiros e filiais regionais. Comece pela sua capital — o orçamento é pelo WhatsApp, o mesmo processo em qualquer uma delas.</p>
         <ul class="faq-list" style="list-style:none;columns:3;gap:2rem;margin-top:2rem">${list}</ul>
       </div>
     </section>
   </main>
   <footer class="site-footer">
     <div class="sc-wrap site-footer__bottom">
-      <p>&copy; Mestre das Caçambas. Preços informados pelo cliente; sujeitos à confirmação de disponibilidade. <a href="../privacidade.html">Política de Privacidade</a></p>
+      <p>&copy; Mestre das Caçambas. Disponibilidade e condições confirmadas pela central antes da contratação. <a href="../privacidade.html">Política de Privacidade</a></p>
     </div>
   </footer>
 </body>

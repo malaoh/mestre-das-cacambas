@@ -15,8 +15,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const OUT_DIR = join(ROOT, 'blog');
 const DOMAIN = 'https://mestredascacambas.com.br'; // domínio real de produção
+const WHATSAPP_NUMBER = '5546991167840'; // mesmo número de app.js — trocar nos dois se mudar
 
 mkdirSync(OUT_DIR, { recursive: true });
+
+const ICO_WA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Zm5.8 14.2c-.3.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.4.7-.4h.5c.2 0 .4 0 .6.4.2.5.7 1.7.8 1.9.1.1.1.3 0 .5-.1.2-.1.3-.3.5l-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.6-.7c.2-.2.4-.2.6-.1l1.7.8c.2.1.4.2.4.4.1.2.1.9-.2 1.5Z"/></svg>';
+
+function waLink(message) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
 
 function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -45,10 +52,10 @@ const ARTICLES = [
       },
       {
         h: 'Um critério simples',
-        p: 'Se você não tem certeza, é mais seguro estimar por cima entre dois volumes vizinhos do que arriscar uma segunda entrega no meio da obra. O atendimento também ajuda a confirmar o volume mais adequado ao descrever o serviço.',
+        p: 'Se você não tem certeza, é mais seguro estimar por cima entre dois volumes vizinhos do que arriscar uma segunda entrega no meio da obra. O atendimento também ajuda a confirmar o volume mais adequado ao descrever o serviço pelo WhatsApp.',
       },
     ],
-    ctaLabel: 'Ver os 5 volumes e preços',
+    ctaLabel: 'Peça Aqui no WhatsApp',
   },
   {
     slug: 'o-que-pode-e-nao-pode-ir-na-cacamba',
@@ -71,10 +78,10 @@ const ARTICLES = [
       },
       {
         h: 'Na dúvida',
-        p: 'Descreva o tipo de resíduo no pedido com o máximo de detalhe possível. A central confirma o que é aceito de acordo com a legislação da sua cidade antes de fechar a locação.',
+        p: 'Descreva o tipo de resíduo pelo WhatsApp com o máximo de detalhe possível. A central confirma o que é aceito de acordo com a legislação da sua cidade antes de fechar a locação.',
       },
     ],
-    ctaLabel: 'Fazer meu pedido',
+    ctaLabel: 'Faça Seu Pedido',
   },
   {
     slug: 'quanto-tempo-posso-ficar-com-a-cacamba',
@@ -85,7 +92,7 @@ const ARTICLES = [
     sections: [
       {
         h: 'Como o prazo é definido',
-        p: 'O período de permanência é combinado diretamente no pedido, de acordo com o andamento da sua obra. Não existe um prazo fixo único para todo mundo — ele é ajustado à necessidade real informada.',
+        p: 'O período de permanência é combinado diretamente com a central, de acordo com o andamento da sua obra. Não existe um prazo fixo único para todo mundo — ele é ajustado à necessidade real informada.',
       },
       {
         h: 'Locações acima de 7 dias',
@@ -96,7 +103,7 @@ const ARTICLES = [
         p: 'Vale alinhar a entrega para o início efetivo da geração de entulho (não semanas antes), e a retirada para o fim real da etapa suja da obra. Isso evita a caçamba ocupando espaço na rua ou no terreno sem necessidade.',
       },
     ],
-    ctaLabel: 'Falar com a central',
+    ctaLabel: 'Falar no WhatsApp',
   },
   {
     slug: 'cacamba-para-reforma-pequena',
@@ -118,13 +125,15 @@ const ARTICLES = [
         p: 'Menos tempo carregando material, menos desgaste físico, e o entulho sai do caminho da obra em vez de se acumular. Para reformas pequenas, esse ganho de tempo costuma pesar mais que o custo do aluguel.',
       },
     ],
-    ctaLabel: 'Escolher minha caçamba',
+    ctaLabel: 'Peça Aqui',
   },
 ];
 
 function articlePage(article) {
   const url = `${DOMAIN}/blog/${article.slug}.html`;
   const title = `${article.title} | Mestre das Caçambas`;
+  const waArticle = waLink(`Olá! Li sobre "${article.title}" e quero fazer um pedido de caçamba. Pode me ajudar com o orçamento?`);
+  const waGeneric = waLink('Olá! Quero saber mais sobre aluguel de caçamba.');
 
   const schemaBlocks = [
     {
@@ -157,8 +166,7 @@ function articlePage(article) {
   <meta property="og:type" content="article">
   <link rel="canonical" href="${url}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2311100F'/><path d='M5 8h12l3 3h7' fill='none' stroke='%238D1027' stroke-width='3'/><path d='M6 15h20v9H6z' fill='%23F4EFE7'/></svg>">
-  <link rel="stylesheet" href="../scrollcraft.css?v=2">
-  <link rel="stylesheet" href="../styles.css?v=2">
+  <link rel="stylesheet" href="../styles.css?v=4">
 ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringify(b)}\n  </script>`).join('\n')}
 </head>
 <body>
@@ -166,7 +174,7 @@ ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringi
     <a class="brand" href="../index.html" aria-label="Mestre das Caçambas, início">
       <img src="../assets/brand/logo-negativo.svg" width="170" height="45" alt="Mestre das Caçambas">
     </a>
-    <a class="header-cta" href="../index.html#comparador">Ver preços e comparador</a>
+    <a class="header-cta" href="${waGeneric}" target="_blank" rel="noopener">${ICO_WA}Peça Aqui</a>
   </header>
 
   <nav aria-label="Trilha">
@@ -180,7 +188,10 @@ ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringi
   <main>
     <section class="city-hero">
       <div class="city-hero__media" aria-hidden="true">
-        <img src="../assets/media/${article.heroPhoto}" width="1672" height="941" alt="" loading="eager" decoding="async">
+        <picture>
+          <source media="(max-width: 760px)" srcset="../assets/media/${article.heroPhoto.replace('.webp', '-mobile.webp')}">
+          <img src="../assets/media/${article.heroPhoto}" width="1672" height="941" alt="" loading="eager" decoding="async">
+        </picture>
       </div>
       <div class="sc-wrap">
         <div class="city-hero__body">
@@ -197,7 +208,7 @@ ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringi
           <p>${escapeHtml(article.intro)}</p>
 ${article.sections.map(s => `          <h2>${escapeHtml(s.h)}</h2>\n          <p>${escapeHtml(s.p)}</p>`).join('\n')}
         </article>
-        <a class="primary-action" href="../index.html#comparador" style="margin-top:1rem">${escapeHtml(article.ctaLabel)}</a>
+        <a class="primary-action" href="${waArticle}" target="_blank" rel="noopener" style="margin-top:1rem">${ICO_WA}${escapeHtml(article.ctaLabel)}</a>
       </div>
     </section>
   </main>
@@ -206,12 +217,12 @@ ${article.sections.map(s => `          <h2>${escapeHtml(s.h)}</h2>\n          <p
     <div class="sc-wrap site-footer__grid">
       <div class="site-footer__brand">
         <img src="../assets/brand/logo-negativo.svg" width="170" height="46" alt="Mestre das Caçambas">
-        <p>Entulho parado não espera. Escolha o volume, confirme com a central e resolva — sem ligação, sem enrolação.</p>
-        <a class="text-cta" href="../index.html#pedido">Fazer meu pedido <span aria-hidden="true">→</span></a>
+        <p>Entulho parado não espera. Escolha o volume, fale com a central pelo WhatsApp e resolva — sem ligação, sem enrolação.</p>
+        <a class="text-cta" href="${waGeneric}" target="_blank" rel="noopener">${ICO_WA}Faça Seu Pedido</a>
       </div>
       <nav class="site-footer__col" aria-label="Navegação do rodapé">
         <p class="site-footer__heading">Navegação</p>
-        <a href="../index.html#comparador">Caçambas e preços</a>
+        <a href="../index.html#comparador">Caçambas</a>
         <a href="../index.html#confianca">Por que confiar</a>
         <a href="../index.html#faq">Perguntas frequentes</a>
         <a href="index.html">Todos os artigos</a>
@@ -219,12 +230,12 @@ ${article.sections.map(s => `          <h2>${escapeHtml(s.h)}</h2>\n          <p
       </nav>
       <div class="site-footer__col">
         <p class="site-footer__heading">Contato</p>
-        <p class="site-footer__pending">WhatsApp da central em conexão</p>
+        <p class="site-footer__pending">WhatsApp da central ativo</p>
         <p>Disponibilidade, resíduos aceitos, permanência e taxas são sempre confirmados no atendimento.</p>
       </div>
     </div>
     <div class="sc-wrap site-footer__bottom">
-      <p>&copy; Mestre das Caçambas. Preços informados pelo cliente; sujeitos à confirmação de disponibilidade. <a href="../privacidade.html">Política de Privacidade</a></p>
+      <p>&copy; Mestre das Caçambas. Disponibilidade e condições confirmadas pela central antes da contratação. <a href="../privacidade.html">Política de Privacidade</a></p>
     </div>
   </footer>
 </body>
@@ -234,6 +245,7 @@ ${article.sections.map(s => `          <h2>${escapeHtml(s.h)}</h2>\n          <p
 
 function hubPage() {
   const cards = ARTICLES.map(a => `<li><a href="${a.slug}.html"><strong>${escapeHtml(a.title)}</strong><span>${escapeHtml(a.description)}</span></a></li>`).join('');
+  const waGeneric = waLink('Olá! Quero saber mais sobre aluguel de caçamba.');
 
   return `<!doctype html>
 <html lang="pt-BR">
@@ -244,15 +256,14 @@ function hubPage() {
   <meta name="description" content="Guias práticos sobre aluguel de caçamba: qual volume escolher, o que pode ir no entulho, prazos e regras.">
   <meta name="theme-color" content="#11100F">
   <link rel="canonical" href="${DOMAIN}/blog/index.html">
-  <link rel="stylesheet" href="../scrollcraft.css?v=2">
-  <link rel="stylesheet" href="../styles.css?v=2">
+  <link rel="stylesheet" href="../styles.css?v=4">
 </head>
 <body>
   <header class="city-header" aria-label="Navegação">
     <a class="brand" href="../index.html" aria-label="Mestre das Caçambas, início">
       <img src="../assets/brand/logo-negativo.svg" width="170" height="45" alt="Mestre das Caçambas">
     </a>
-    <a class="header-cta" href="../index.html#comparador">Ver preços e comparador</a>
+    <a class="header-cta" href="${waGeneric}" target="_blank" rel="noopener">${ICO_WA}Peça Aqui</a>
   </header>
   <main>
     <section class="sc-section flow-section" aria-labelledby="blog-title">
@@ -265,7 +276,7 @@ function hubPage() {
   </main>
   <footer class="site-footer">
     <div class="sc-wrap site-footer__bottom">
-      <p>&copy; Mestre das Caçambas. Preços informados pelo cliente; sujeitos à confirmação de disponibilidade. <a href="../privacidade.html">Política de Privacidade</a></p>
+      <p>&copy; Mestre das Caçambas. Disponibilidade e condições confirmadas pela central antes da contratação. <a href="../privacidade.html">Política de Privacidade</a></p>
     </div>
   </footer>
 </body>

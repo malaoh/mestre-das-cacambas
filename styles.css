@@ -2,19 +2,32 @@
 @font-face{font-family:Manrope;src:url("assets/brand/manrope-400.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:Manrope;src:url("assets/brand/manrope-600.woff2") format("woff2");font-weight:600;font-display:swap}
 
-:root{--sc-canvas:#11100f;--sc-surface:#191716;--sc-ink:#f4efe7;--sc-ink-soft:#d8d1c6;--sc-accent:#b5192f;--sc-accent-ink:#fff;--sc-font-display:"Barlow Condensed",Impact,sans-serif;--sc-font-text:Manrope,Arial,sans-serif;--rubro:#8d1027;--rubro-hot:#d12038;--concrete:#d8d1c6;--ivory:#f4efe7;--carbon:#11100f;--gutter:clamp(1rem,4.8vw,5.5rem)}
-html{background:var(--carbon);scroll-behavior:smooth}
+:root{--sc-canvas:#11100f;--sc-surface:#191716;--sc-ink:#f4efe7;--sc-ink-soft:#d8d1c6;--sc-accent:#b5192f;--sc-accent-ink:#fff;--sc-font-display:"Barlow Condensed",Impact,sans-serif;--sc-font-text:Manrope,Arial,sans-serif;--rubro:#8d1027;--rubro-hot:#d12038;--concrete:#d8d1c6;--ivory:#f4efe7;--carbon:#11100f;--gutter:clamp(1rem,4.8vw,5.5rem);--sc-gutter:var(--gutter);--sc-maxw:82rem;--sc-section:clamp(4.5rem,9vw,11rem)}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--carbon);scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{overscroll-behavior-y:none}
-button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+body{margin:0;overflow-x:clip;overscroll-behavior-y:none;background:var(--carbon);color:var(--ivory);font-family:var(--sc-font-text);font-size:1rem;line-height:1.62;letter-spacing:-.005em;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{display:block;max-width:100%}
+button,a,input,select,textarea{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 button{border:0}
+::selection{background:var(--rubro-hot);color:#fff}
+:focus-visible{outline:2px solid var(--rubro-hot);outline-offset:3px}
+.sc-wrap{width:100%;max-width:var(--sc-maxw);margin-inline:auto;padding-inline:var(--sc-gutter)}
+.sc-section{padding-block:var(--sc-section)}
+.sc-scrim{position:absolute;inset:0;z-index:1;pointer-events:none}
+.sc-scrim--lead{background:linear-gradient(to top right,rgba(17,16,15,.97) 0%,rgba(17,16,15,.76) 30%,rgba(17,16,15,.3) 54%,transparent 74%)}
+.sc-scrim--vignette{background:radial-gradient(120% 90% at 50% 45%,transparent 38%,rgba(17,16,15,.78) 100%)}
 .skip-link{position:fixed;left:1rem;top:-5rem;z-index:1000;background:var(--ivory);color:var(--carbon);padding:.75rem 1rem}.skip-link:focus{top:1rem}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* ---- header / nav ------------------------------------------------------ */
 .site-header{position:fixed;inset:0 0 auto;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:clamp(.85rem,2.2vw,1.65rem) var(--gutter);background:color-mix(in oklab,var(--carbon) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(244,239,231,.08);pointer-events:none}
 .site-header>*{pointer-events:auto}.brand img{width:clamp(145px,16vw,220px);height:auto}.site-nav{display:flex;align-items:center;gap:clamp(1rem,2.7vw,2.8rem)}.site-nav a{font-size:.74rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase;text-decoration:none;color:var(--ivory)}
-.header-cta,.primary-action{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:48px;padding:.8rem 1.5rem;background:linear-gradient(135deg,var(--rubro),var(--rubro-hot));color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);box-shadow:0 6px 16px rgba(50,0,9,.3);transition:filter .18s ease,transform .18s ease,box-shadow .18s ease}.header-cta:hover,.primary-action:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 8px 20px rgba(50,0,9,.36)}
+/* every CTA on the site is a WhatsApp hand-off now: solid official green,
+   white text, the recognizable glyph up front. Keeps the brand's angular
+   clip-path signature so it still reads as this site, not a stock button. */
+.header-cta,.primary-action{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.8rem 1.5rem;background:linear-gradient(135deg,#1da851,#25D366);color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);box-shadow:0 6px 16px rgba(6,44,22,.35);transition:filter .18s ease,transform .18s ease,box-shadow .18s ease}.header-cta:hover,.primary-action:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 8px 20px rgba(6,44,22,.4)}
+.header-cta svg,.primary-action svg{width:16px;height:16px;flex:none;fill:#fff}
 
 /* hamburger: hidden on desktop, the mobile drawer carries the full nav so
    mobile isn't a stripped-down version of the desktop menu */
@@ -25,37 +38,36 @@ button{border:0}
 .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .mobile-nav{display:none}
 
-/* a plain text CTA with an arrow, for mid-page prompts that don't want the
-   weight of the clipped primary-action button repeated on every section */
-.text-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:clamp(2rem,4vw,3rem);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ivory);text-decoration:none;border-bottom:1px solid var(--rubro-hot);padding-bottom:.3rem;transition:gap .18s ease,color .18s ease}
-.text-cta:hover{gap:.8rem;color:var(--rubro-hot)}
-.text-cta span{color:var(--rubro-hot)}
+/* a plain text CTA with the WhatsApp glyph, for mid-page prompts that don't
+   want the weight of the clipped primary-action button repeated every section */
+.text-cta{display:inline-flex;align-items:center;gap:.5rem;margin-top:clamp(2rem,4vw,3rem);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ivory);text-decoration:none;border-bottom:1px solid #25D366;padding-bottom:.3rem;transition:gap .18s ease,color .18s ease}
+.text-cta:hover{gap:.8rem;color:#25D366}
+.text-cta span:not(.text-cta__icon){color:#25D366}
+.text-cta__icon{width:15px;height:15px;flex:none;fill:#25D366}
 /* quiet variant for the silence beat: same mechanism, none of the volume —
    the section is a breath, the CTA shouldn't be the loudest thing in it */
-.text-cta--ghost{color:rgba(244,239,231,.72);border-bottom-color:rgba(209,32,56,.45);font-size:.7rem;text-shadow:0 2px 8px rgba(8,7,6,.9)}
+.text-cta--ghost{color:rgba(244,239,231,.72);border-bottom-color:rgba(37,211,102,.45);font-size:.7rem;text-shadow:0 2px 8px rgba(8,7,6,.9)}
 .text-cta--ghost:hover{color:var(--ivory)}
 
 /* hero quick-locate: closes the gap between "informe sua cidade" (copy promise)
-   and actually doing it — an Ads click already knows what it wants, this turns
-   that intent into one field instead of a scroll down to the full form. Submits
-   into #order-form's real city input (see app.js), it doesn't duplicate state. */
+   and actually doing it — an Ads click already knows what it wants. Submits
+   straight to WhatsApp with the typed city in the message (see app.js). */
 .hero-quick-form{display:flex;max-width:27rem;margin-top:1.8rem}
 .hero-quick-form input{flex:1;min-width:0;background:rgba(17,16,15,.6);border:1px solid rgba(244,239,231,.35);border-right:0;color:var(--ivory);font-size:.85rem;padding:0 1rem;backdrop-filter:blur(6px)}
 .hero-quick-form input::placeholder{color:rgba(244,239,231,.55)}
 .hero-quick-form input:focus{outline:none;border-color:var(--rubro-hot)}
-.hero-quick-form button{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:48px;padding:.8rem 1.3rem;background:linear-gradient(135deg,var(--rubro),var(--rubro-hot));color:#fff;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border:0;cursor:pointer;white-space:nowrap;transition:filter .18s ease,transform .18s ease}
-.hero-quick-form button:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.hero-quick-form button{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:48px;padding:.8rem 1.3rem;background:linear-gradient(135deg,#1da851,#25D366);color:#fff;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;border:0;cursor:pointer;white-space:nowrap;transition:filter .18s ease,transform .18s ease}
+.hero-quick-form button svg{width:16px;height:16px;flex:none;fill:#fff}
+.hero-quick-form button:hover{filter:brightness(1.1);transform:translateY(-1px)}
 
-/* secondary CTA next to a primary-action: same shape/height, outline instead
-   of fill, so it reads as "the other path" without competing in weight or
-   color. The WhatsApp glyph carries its official green as a small recognition
-   accent — the button itself stays inside the Concreto Rubro palette. */
+/* every CTA is a WhatsApp hand-off: .whatsapp-cta is now the same solid-green
+   button as .primary-action/.header-cta, just under its own name for the
+   elements that were built with the WhatsApp glyph baked into their markup. */
 .hero-ctas{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem;margin-top:1rem}
-.whatsapp-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.8rem 1.4rem;background:transparent;border:1px solid rgba(244,239,231,.35);color:var(--ivory);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;transition:border-color .18s ease,color .18s ease,background-color .18s ease}
-.whatsapp-cta:hover{border-color:#25D366;color:var(--ivory);background:rgba(37,211,102,.08)}
-.whatsapp-cta svg{width:16px;height:16px;flex:none;fill:#25D366}
-.whatsapp-cta:disabled{filter:grayscale(.6);opacity:.55;cursor:not-allowed}
-.whatsapp-cta:disabled:hover{border-color:rgba(244,239,231,.35);background:transparent}
+.whatsapp-cta{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;min-height:48px;padding:.8rem 1.4rem;background:linear-gradient(135deg,#1da851,#25D366);border:0;color:#fff;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;text-decoration:none;box-shadow:0 6px 16px rgba(6,44,22,.35);transition:filter .18s ease,transform .18s ease,box-shadow .18s ease}
+.whatsapp-cta:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 8px 20px rgba(6,44,22,.4)}
+.whatsapp-cta svg{width:16px;height:16px;flex:none;fill:#fff}
+.whatsapp-cta:disabled{filter:grayscale(.6);opacity:.55;cursor:not-allowed;transform:none}
 
 /* header height offset so anchor jumps don't land under the fixed bar */
 #hero,#operacao,#processo,#silencio,#comparador,#aplicacao,#confianca,#faq,#pedido{scroll-margin-top:clamp(4.5rem,9vw,7rem)}
@@ -78,15 +90,12 @@ p{margin:0}
 .trust-tags{list-style:none;display:flex;flex-wrap:wrap;gap:.5rem;margin:1.6rem 0 0;padding:0}
 .trust-tags li{padding:.5rem .85rem;border:1px solid rgba(244,239,231,.22);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--concrete)}
 
-/* ---- hero (data-sc-act="scrub") — richer scroll ----------------------- */
-.hero-act [data-sc-stage]{background:var(--carbon)}
-.sc-stage__poster,video[data-sc-scrub]{object-fit:cover}
-/* cinematic push-in tied to the act's own scroll progress (--sc-p, 0..1) */
-.hero-media{transform:scale(calc(1 + var(--sc-p,0) * 0.07));transform-origin:52% 45%;will-change:transform}
-/* pointer-driven light, desktop only: --sc-mx/--sc-my come from data-sc-spotlight */
-.hero-spotlight{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .3s ease;background:radial-gradient(420px circle at calc(var(--sc-mx,.5) * 100%) calc(var(--sc-my,.5) * 100%),rgba(244,239,231,.14),transparent 62%)}
-@media (hover:hover) and (pointer:fine){.hero-act:hover .hero-spotlight{opacity:1}}
-.hero-copy{max-width:min(680px,48vw);inset-inline:var(--gutter);left:var(--gutter);bottom:clamp(3rem,10vh,9rem)}
+/* ---- hero estático: a fotografia original é o LCP e aparece no primeiro paint */
+.hero-act,.hero-stage{position:relative;min-height:100svh;background:var(--carbon);overflow:hidden}
+.hero-stage>picture,.hero-media{position:absolute;inset:0;width:100%;height:100%}
+.hero-media{object-fit:cover;transform-origin:52% 45%}
+.hero-spotlight{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(420px circle at 78% 34%,rgba(244,239,231,.1),transparent 62%)}
+.hero-copy{position:absolute;z-index:2;max-width:min(680px,48vw);left:var(--gutter);right:var(--gutter);bottom:clamp(3rem,10vh,9rem)}
 @media (min-width:1600px){.hero-copy{max-width:min(820px,44vw)}}
 /* a wide-but-shortish window (large monitor, browser chrome eating the
    height) needs the whole stack tightened, not just the headline — five
@@ -126,17 +135,10 @@ p{margin:0}
 .process-list strong{font-family:var(--sc-font-display);font-size:1.6rem;text-transform:uppercase;color:var(--ivory)}
 .process-list span{font-size:.88rem;color:rgba(244,239,231,.75);align-self:center}
 
-/* ---- silence beat: a second, shorter scrub act on the real rollon clip —
-   the footage the pipeline actually filmed for this moment, not a static
-   poster faked into moving. Same grammar as the hero (scrub + spotlight),
-   so the two quiet, camera-driven moments on the page read as one language.
-   The old ruler read as a stray progress bar; this reads as spec silhouettes
-   because it borrows the brief's own approved device: graduated outlines,
-   never numbers baked into the frame. */
-.silence-act [data-sc-stage]{background:var(--carbon)}
-.silence-media{object-fit:cover}
-.silence-spotlight{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .3s ease;background:radial-gradient(460px circle at calc(var(--sc-mx,.5) * 100%) calc(var(--sc-my,.5) * 100%),rgba(244,239,231,.12),transparent 62%)}
-@media (hover:hover) and (pointer:fine){.silence-act:hover .silence-spotlight{opacity:1}}
+/* ---- pausa visual estática, sem vídeo, scrub ou trabalho por frame ------- */
+.silence-act,.silence-stage{position:relative;min-height:clamp(600px,82svh,880px);overflow:hidden;background:var(--carbon)}
+.silence-media{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.silence-spotlight{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(460px circle at 76% 35%,rgba(244,239,231,.1),transparent 62%)}
 .silence-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(13,12,11,.96) 0%,rgba(13,12,11,.76) 42%,rgba(13,12,11,.28) 70%,rgba(13,12,11,.18) 100%)}
 .silence-copy{position:absolute;inset:auto auto 17vh var(--gutter);z-index:2;max-width:min(640px,50vw)}
 .silence-kicker{font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rubro-hot);margin:0;text-shadow:0 2px 8px rgba(8,7,6,.9)}
@@ -153,9 +155,9 @@ p{margin:0}
 .measure-array__item svg{width:100%;height:100%;overflow:visible;display:block}
 .measure-array__item path{fill:rgba(209,32,56,.14);stroke:var(--rubro-hot);stroke-width:1.4;vector-effect:non-scaling-stroke}
 
-/* ---- comparator (data-sc-act="pin") — the peak, now a living object --- */
-.comparator-act [data-sc-stage]{background:var(--carbon)}
-.comparator-bg{object-fit:cover;opacity:.55;filter:saturate(.55) contrast(1.12)}
+/* ---- comparador estático: mantém seleção e WhatsApp, remove WebGL -------- */
+.comparator-act,.comparator-stage{position:relative;min-height:clamp(680px,88svh,920px);overflow:hidden;background:var(--carbon)}
+.comparator-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:saturate(.55) contrast(1.12)}
 .comparator-copy{position:absolute;inset:auto var(--gutter) 6.5vh;display:grid;grid-template-columns:minmax(280px,1.2fr) minmax(560px,1.8fr);align-items:end;gap:clamp(2rem,5vw,6rem);max-width:none;z-index:2}
 .comparator-copy__head h2{font-size:clamp(2.65rem,4vw,4.65rem);max-width:12ch;color:var(--ivory)}
 .comparator-copy__head p{font-size:.83rem;margin-top:.8rem;max-width:fit-content;color:rgba(244,239,231,.94);text-shadow:0 2px 8px rgba(8,7,6,.85);background:rgba(8,7,6,.55);padding:.5rem .7rem}
@@ -172,13 +174,6 @@ p{margin:0}
 .comparator-actions{grid-column:2;margin-top:1.1rem;display:flex;flex-direction:column;align-items:flex-start;gap:.55rem}
 .comparator-actions .primary-action{min-height:52px}
 .price-note{margin:0;font-size:.66rem;color:rgba(244,239,231,.6)}
-.three-stage{position:absolute;z-index:1;inset:4vh 7vw 26vh 39vw;pointer-events:auto;cursor:grab}
-.three-stage:active{cursor:grabbing}
-.three-stage canvas,.three-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.three-stage canvas{opacity:0;transition:opacity .4s ease}
-.three-stage.is-ready canvas{opacity:1}.three-stage.is-ready .three-fallback{opacity:0}
-.three-fallback{filter:drop-shadow(0 28px 34px rgba(0,0,0,.48));transition:opacity .4s ease}
-
 /* ---- aplicação ---------------------------------------------------------*/
 .service-tags{list-style:none;display:flex;flex-wrap:wrap;gap:0;margin:1.6rem 0 0;padding:0;border-block:1px solid rgba(244,239,231,.2)}
 .service-tags li{padding:.62rem .85rem;border-right:1px solid rgba(244,239,231,.2);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ivory)}
@@ -211,44 +206,14 @@ p{margin:0}
 .faq-item[open] summary::after{transform:rotate(45deg)}
 .faq-item p{padding:0 2rem 1.3rem 0;font-size:.85rem;max-width:60ch}
 
-/* ---- order form --------------------------------------------------------*/
-.order-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(1.5rem,3.5vw,4rem);align-items:start}
-.order-intro h2{font-size:clamp(2.4rem,3.6vw,3.6rem);max-width:12ch}
-.order-intro p{font-size:.85rem;margin-top:1rem}
-.order-summary{margin-top:clamp(1.5rem,3vw,2.25rem);padding:1.1rem 1.25rem;border:1px solid rgba(244,239,231,.2);background:rgba(244,239,231,.04)}
-.order-summary__label{font-size:.62rem;text-transform:uppercase;letter-spacing:.12em;color:var(--rubro-hot);font-weight:700;margin:0}
-.order-summary dl{margin:.85rem 0 0;display:grid;gap:.55rem}
-.order-summary dl>div{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-bottom:1px solid rgba(244,239,231,.12);padding-bottom:.5rem}
-.order-summary dt{font-size:.68rem;color:rgba(244,239,231,.6);text-transform:uppercase;letter-spacing:.06em}
-.order-summary dd{margin:0;font-size:.85rem;font-weight:600;color:var(--ivory);text-align:right}
-.order-summary__note{margin:.9rem 0 0;padding:.7rem .8rem;background:rgba(141,16,39,.22);border-left:2px solid var(--rubro-hot);font-size:.72rem;line-height:1.5;color:var(--concrete)}
-#order-form{padding-left:clamp(1rem,2.2vw,2.5rem);border-left:1px solid rgba(244,239,231,.2)}
-.form-legend{margin:0 0 1.5rem;font-size:.66rem;color:rgba(244,239,231,.5)}
-.form-legend span{color:var(--rubro-hot)}
-.form-group-label{margin:0 0 .8rem;font-size:.66rem;text-transform:uppercase;letter-spacing:.12em;color:var(--rubro-hot);font-weight:700}
-.form-group-label:not(:first-of-type){margin-top:1.6rem}
-.field-row{display:grid;grid-template-columns:1.3fr .7fr;gap:.75rem}
-#order-form label{display:block;margin:0 0 .7rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(244,239,231,.68)}
-.field-required{color:var(--rubro-hot)}
-.field-optional span{text-transform:none;letter-spacing:0;color:rgba(244,239,231,.42);font-weight:400}
-#order-form input,#order-form select,#order-form textarea{width:100%;margin-top:.32rem;padding:.66rem .7rem;background:rgba(244,239,231,.06);border:1px solid rgba(244,239,231,.22);border-radius:0;color:var(--ivory);font-size:.8rem;text-transform:none;letter-spacing:0;transition:border-color .18s ease,background .18s ease}
-#order-form input:focus,#order-form select:focus,#order-form textarea:focus{border-color:var(--rubro-hot);background:rgba(244,239,231,.09);outline:none}
-#order-form select option{color:#111}
-#order-form textarea{resize:vertical}
-.form-actions{display:flex;gap:.75rem}.form-actions button{min-height:46px;font-size:.7rem}
-.secondary-action{background:transparent;border:1px solid rgba(244,239,231,.35);color:var(--ivory);padding:.75rem 1rem;text-transform:uppercase;letter-spacing:.07em;cursor:pointer}
-.secondary-action:hover{border-color:var(--rubro-hot);color:var(--rubro-hot)}
-.secondary-action small{display:block;font-size:.58rem;font-weight:400;opacity:.65;margin-top:.1rem}
-.form-status{font-size:.63rem;margin:.6rem 0 0;color:rgba(244,239,231,.75)}
-.primary-action:disabled,.secondary-action:disabled{filter:grayscale(.7);cursor:not-allowed;opacity:.5;transform:none;border-color:rgba(244,239,231,.15)}
-.secondary-action:disabled:hover{color:var(--ivory)}
-
-/* one-time confirmation pulse when the reader arrives here having already
-   picked a volume in the comparator — the summary was updating silently
-   before; now the arrival itself is legible. */
-.order-summary.is-confirmed{animation:summary-pulse 1.4s ease}
-@keyframes summary-pulse{0%{box-shadow:0 0 0 0 rgba(209,32,56,0);background:rgba(244,239,231,.04)}25%{box-shadow:0 0 0 3px rgba(209,32,56,.35);background:rgba(141,16,39,.16)}100%{box-shadow:0 0 0 0 rgba(209,32,56,0);background:rgba(244,239,231,.04)}}
-@media (prefers-reduced-motion:reduce){.order-summary.is-confirmed{animation:none}}
+/* ---- pedido: bloco final único, sem formulário, sem preço — o WhatsApp
+   assume a etapa de qualificação/orçamento que o form fazia antes. */
+.final-cta{max-width:38rem;margin-inline:auto;text-align:center}
+.final-cta h2{font-size:clamp(2.4rem,5vw,4rem)}
+.final-cta p{font-size:.9rem;margin-top:1rem;color:rgba(244,239,231,.72)}
+.final-cta .whatsapp-cta{margin-top:2rem;font-size:.85rem;padding:1.1rem 2.2rem;min-height:56px}
+.final-cta .whatsapp-cta svg{width:20px;height:20px}
+.primary-action:disabled{filter:grayscale(.7);cursor:not-allowed;opacity:.5;transform:none}
 /* ---- footer: full rebuild, own site-wide surface ------------------------*/
 .site-footer{background:var(--sc-surface);border-top:1px solid rgba(244,239,231,.14);padding-top:clamp(3rem,6vw,4.5rem)}
 .site-footer__grid{display:grid;grid-template-columns:1.3fr .8fr .8fr .9fr;gap:clamp(2rem,4vw,3.5rem)}
@@ -269,7 +234,7 @@ p{margin:0}
 
 /* ---- mobile -------------------------------------------------------------*/
 @media (max-width:900px){
-  .site-nav>a:not(.header-cta){display:none}.site-header{padding-top:max(.75rem,env(safe-area-inset-top))}.site-nav{gap:.6rem}.header-cta{font-size:.61rem;min-height:42px;padding:.7rem .85rem}.brand img{width:138px}
+  .site-nav>a:not(.header-cta){display:none}.site-header{padding-top:max(.75rem,env(safe-area-inset-top));backdrop-filter:none;-webkit-backdrop-filter:none}.site-nav{gap:.6rem}.header-cta{font-size:.61rem;min-height:42px;padding:.7rem .85rem;white-space:nowrap}.brand img{width:138px}
   .nav-toggle{display:flex}
   .mobile-nav{display:flex;flex-direction:column;gap:0;position:fixed;inset:0;z-index:75;background:var(--carbon);padding:calc(5.5rem + env(safe-area-inset-top)) 1.5rem 2rem;transform:translateX(100%);transition:transform .32s cubic-bezier(.32,.72,0,1);overflow-y:auto}
   .mobile-nav.is-open{transform:translateX(0)}
@@ -327,7 +292,6 @@ p{margin:0}
   .comparator-actions{margin-top:.9rem}
   .comparator-actions .primary-action{width:100%}
   .price-note{font-size:.55rem}
-  .three-stage{inset:14vh 0 32vh}
   .comparator-bg{object-position:center}
 
   .service-tags{margin-top:1.2rem}.service-tags li{font-size:.56rem;padding:.5rem}
@@ -338,23 +302,32 @@ p{margin:0}
   .faq-item summary{font-size:.92rem;padding:1rem 1.8rem 1rem 0}
   .faq-item p{padding:0 1.8rem 1.1rem 0;font-size:.8rem}
 
-  .order-grid{display:block}
-  .order-summary{display:none}
-  #order-form{padding:1.2rem 0 0;border:0}
-  .order-intro p{font-size:.82rem}
-  .field-row{gap:.55rem}
-  #order-form label{font-size:.55rem;margin-bottom:.5rem}
-  #order-form input,#order-form select,#order-form textarea{padding:.58rem;font-size:.72rem}
-  /* NÃO sticky: um bar fixo aqui flutuava sobre "Quando/Duração/Período/
-     Observações" antes de o leitor chegar neles, parecendo que o formulário
-     tinha acabado no meio. Ação fica só no fim real, onde ela é a conclusão. */
-  .form-actions{flex-direction:column;padding-top:.6rem}
-  .form-actions button{width:100%}
+  .final-cta .whatsapp-cta{width:100%}
 
   .site-footer__grid{grid-template-columns:1fr;gap:2rem}
   .site-footer__brand p{max-width:none}
 
   .text-cta{margin-top:1.75rem;font-size:.72rem}
+}
+
+/* Celulares estreitos e baixos precisam de composição própria: o conteúdo
+   segue completo, mas deixa de depender de uma pilha alta ancorada no rodapé. */
+@media (max-width:380px) and (max-height:650px){
+  .site-header{padding-inline:.75rem}
+  .brand img{width:106px}
+  .site-nav{gap:.25rem}
+  .header-cta{min-height:42px;padding:.55rem .65rem;font-size:.54rem}
+  .nav-toggle{width:38px}
+  .hero-stage{min-height:100svh}
+  .hero-copy{top:5.4rem;bottom:auto;left:1rem;right:1rem;max-width:none}
+  .service-line{display:none}
+  h1{font-size:clamp(2.75rem,14vw,3.2rem)}
+  .hero-copy p{margin-top:.65rem;font-size:.78rem;line-height:1.4}
+  .hero-copy .hero-quick-form{margin-top:.75rem}
+  .hero-copy .hero-quick-form input,.hero-copy .hero-quick-form button{min-height:42px}
+  .hero-copy .hero-ctas{margin-top:.65rem}
+  .hero-copy .whatsapp-cta{min-height:42px;padding:.65rem 1rem}
+  .hero-copy p.hero-coverage{margin-top:.65rem;font-size:.66rem;line-height:1.4}
 }
 
 @media (max-height:700px) and (min-width:901px){
@@ -365,7 +338,6 @@ p{margin:0}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .three-stage{display:none}
   .hero-media{transform:none!important}
   .hero-spotlight{display:none}
   .silence-spotlight{display:none}
@@ -373,7 +345,7 @@ p{margin:0}
 }
 
 /* ============================================================================
-   Páginas de cidade (cidades/*.html) — SEO local, zero JS, sem scrollcraft.
+   Páginas de cidade (cidades/*.html) — SEO local e zero JavaScript.
    Reaproveita os tokens/classes acima (h1/h2, .ink, .flow-section, .faq-item,
    .testimonial-card, .primary-action, .text-cta, .site-footer...); estas são
    só as peças que a home não tinha: banda de hero estática, breadcrumb e a

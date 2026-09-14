@@ -1,11 +1,11 @@
 {
   "name": "mestre-das-cacambas",
   "version": "1.0.0",
-  "description": "Experiência scroll story da Mestre das Caçambas",
+  "description": "Site estático e performático da Mestre das Caçambas",
   "main": "app.js",
   "scripts": {
     "start": "node serve.mjs . --port 4173",
-    "check": "node --check app.js && node --check three-scene.js"
+    "check": "node --check app.js"
   },
   "keywords": [],
   "author": "",

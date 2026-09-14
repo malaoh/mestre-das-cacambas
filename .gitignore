@@ -1,3 +1,8 @@
 node_modules/
 lab/
 .impeccable/
+.playwright-cli/
+hostinger-upload-*/
+output/
+mestrechost/
+*.zip
