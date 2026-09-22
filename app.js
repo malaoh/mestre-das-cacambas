@@ -1,7 +1,7 @@
 // TROCAR: número real da central em formato internacional sem símbolos
 // (ex.: '5511987654321'). Todo CTA do site liga pra esse número — é o único
 // canal de pedido/orçamento hoje (sem formulário, sem preço publicado).
-const WHATSAPP_NUMBER = '5546991167840';
+const WHATSAPP_NUMBER = '5531990980148';
 
 const selector = document.querySelector('.product-selector');
 const measure = document.querySelector('.measurement-progress');

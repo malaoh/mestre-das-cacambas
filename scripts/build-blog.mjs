@@ -15,7 +15,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const OUT_DIR = join(ROOT, 'blog');
 const DOMAIN = 'https://mestredascacambas.com.br'; // domínio real de produção
-const WHATSAPP_NUMBER = '5546991167840'; // mesmo número de app.js — trocar nos dois se mudar
+const WHATSAPP_NUMBER = '5531990980148'; // mesmo número de app.js — trocar nos dois se mudar
 
 mkdirSync(OUT_DIR, { recursive: true });
 
