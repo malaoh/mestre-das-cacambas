@@ -166,7 +166,7 @@ function articlePage(article) {
   <meta property="og:type" content="article">
   <link rel="canonical" href="${url}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%2311100F'/><path d='M5 8h12l3 3h7' fill='none' stroke='%238D1027' stroke-width='3'/><path d='M6 15h20v9H6z' fill='%23F4EFE7'/></svg>">
-  <link rel="stylesheet" href="../styles.css?v=4">
+  <link rel="stylesheet" href="../styles.css?v=5">
 ${schemaBlocks.map(b => `  <script type="application/ld+json">\n  ${JSON.stringify(b)}\n  </script>`).join('\n')}
 </head>
 <body>
@@ -256,7 +256,7 @@ function hubPage() {
   <meta name="description" content="Guias práticos sobre aluguel de caçamba: qual volume escolher, o que pode ir no entulho, prazos e regras.">
   <meta name="theme-color" content="#11100F">
   <link rel="canonical" href="${DOMAIN}/blog/index.html">
-  <link rel="stylesheet" href="../styles.css?v=4">
+  <link rel="stylesheet" href="../styles.css?v=5">
 </head>
 <body>
   <header class="city-header" aria-label="Navegação">
